@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
-import "./App.css";
+import { useState, useEffect, useCallback } from "react"
+import "./App.css"
+import MoonLoader from "react-spinners/ClipLoader"
 
 const query = `
 {
@@ -15,7 +16,7 @@ const query = `
 `;
 
 function App() {
-  const [page, setPage] = useState(null)
+  const [pageContent, setPageContent] = useState(null)
 
   const fetchContent = useCallback(() => {
     fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`, {
@@ -28,7 +29,7 @@ function App() {
       })
       .then(async response => {
         const data = await response.json();
-        setPage(data?.data?.pageCollection?.items?.[0])
+        setPageContent(data?.data?.pageCollection?.items?.[0])
     })
     .catch(error => {
         console.error('There was an error!', error);
@@ -39,19 +40,25 @@ function App() {
     fetchContent()
   }, [fetchContent]);
 
-  if (!page) {
-    return "Loading...";
+  if (!pageContent) {
+    return (
+      <div className="grid place-items-center h-screen">
+        <MoonLoader
+          size={120}
+        />
+      </div>
+      )
   }
 
   // render the fetched Contentful data
   return (
     <div className="App">
       <header className="App-header">
-        <img src={page.pageLogo.url} className="App-logo" alt="logo" />
-        <p>{page.pageTitle}</p>
+        <img src={pageContent.pageLogo.url} className="App-logo" alt="logo" />
+        <p>{pageContent.pageTitle}</p>
       </header>
     </div>
-  );
+  )
 }
 
 export default App;
