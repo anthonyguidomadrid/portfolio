@@ -1,6 +1,8 @@
 import { useState, useEffect, useCallback } from "react"
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
+import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 
 const query = `
 {
@@ -10,6 +12,12 @@ const query = `
       pageLogo {
         url
       }
+    }
+  }
+  seoCollection {
+    items {
+      title
+      description
     }
   }
 }
@@ -28,8 +36,8 @@ function App() {
         body: JSON.stringify({ query }),
       })
       .then(async response => {
-        const data = await response.json();
-        setPageContent(data?.data?.pageCollection?.items?.[0])
+        const data = await response.json()
+        setPageContent(contentfulNormalizer(data))
     })
     .catch(error => {
         console.error('There was an error!', error);
@@ -50,15 +58,25 @@ function App() {
       )
   }
 
-  // render the fetched Contentful data
   return (
+    <>
+    <HelmetProvider>
+      <Helmet>
+        <title>{pageContent.seo.title}</title>
+        <meta
+          name="description"
+          content={pageContent.seo.description}
+        />
+      </Helmet>
+    </HelmetProvider>
     <div className="App">
       <header className="App-header">
-        <img src={pageContent.pageLogo.url} className="App-logo" alt="logo" />
-        <p>{pageContent.pageTitle}</p>
+        <img src={pageContent.page.logoUrl} className="App-logo" alt="logo" />
+        <p>{pageContent.page.title}</p>
       </header>
     </div>
+    </>
   )
 }
 
-export default App;
+export default App
