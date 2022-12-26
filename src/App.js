@@ -62,17 +62,17 @@ function App() {
     <>
     <HelmetProvider>
       <Helmet>
-        <title>{pageContent.seo.title}</title>
+        <title>{pageContent?.seo?.title}</title>
         <meta
           name="description"
-          content={pageContent.seo.description}
+          content={pageContent?.seo?.description}
         />
       </Helmet>
     </HelmetProvider>
     <div className="App">
       <header className="App-header">
-        <img src={pageContent.page.logoUrl} className="App-logo" alt="logo" />
-        <p>{pageContent.page.title}</p>
+        <img src={pageContent?.page?.logoUrl} className="App-logo" alt="logo" />
+        <p>{pageContent?.page?.title}</p>
       </header>
     </div>
     </>
