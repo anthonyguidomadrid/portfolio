@@ -4,6 +4,7 @@ import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 const App = () => {
   const [pageContent, setPageContent] = useState(null)
@@ -52,12 +53,15 @@ const App = () => {
       </Helmet>
     </HelmetProvider>
     {console.log('pageContent', pageContent)}
-    <div className="App">
-      <header className="App-header">
-        <img src={pageContent?.page?.logoUrl} className="App-logo" alt="logo" />
-        <p>{pageContent?.page?.title}</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route>
+          <Route index element={<h1>Home</h1>} />
+          <Route path="/projects/:id" element={<h1>Projects</h1>} />
+          <Route path="*" element={<h1>404</h1>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
