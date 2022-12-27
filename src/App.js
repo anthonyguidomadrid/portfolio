@@ -3,27 +3,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
+import { graphQlQuery } from './graphQL/contentfulQuery'
 
-const query = `
-{
-  pageCollection {
-    items {
-      pageTitle
-      pageLogo {
-        url
-      }
-    }
-  }
-  seoCollection {
-    items {
-      title
-      description
-    }
-  }
-}
-`;
-
-function App() {
+const App = () => {
   const [pageContent, setPageContent] = useState(null)
 
   const fetchContent = useCallback(() => {
@@ -33,7 +15,7 @@ function App() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN}`,
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query: graphQlQuery }),
       })
       .then(async response => {
         const data = await response.json()
@@ -69,6 +51,7 @@ function App() {
         />
       </Helmet>
     </HelmetProvider>
+    {console.log('pageContent', pageContent)}
     <div className="App">
       <header className="App-header">
         <img src={pageContent?.page?.logoUrl} className="App-logo" alt="logo" />
