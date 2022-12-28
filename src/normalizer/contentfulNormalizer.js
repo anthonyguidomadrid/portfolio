@@ -12,6 +12,12 @@ export const contentfulNormalizer = (response) => {
                 description: response?.data?.aboutCollection?.items?.[0]?.image?.description
             }
         },
+        assets: {
+            logo: {
+                url: response?.data?.assetsCollection?.items?.[0].logo?.url,
+                description: response?.data?.assetsCollection?.items?.[0].logo?.description
+            }
+        },
         contact: {
             title: response?.data?.contactCollection?.items?.[0]?.title,
             subtitle: response?.data?.contactCollection?.items?.[0]?.subtitle,

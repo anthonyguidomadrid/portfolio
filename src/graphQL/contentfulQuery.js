@@ -1,6 +1,6 @@
 export const graphQlQuery = `
 {
-  aboutCollection {
+  aboutCollection(limit: 1) {
     items {
       title
       subtitle
@@ -13,7 +13,16 @@ export const graphQlQuery = `
       }
     }
   }
-  contactCollection {
+  assetsCollection(limit: 1) {
+    items {
+      logo {
+        url
+        description
+      }
+      
+    }
+  } 
+  contactCollection(limit: 1) {
     items {
       title
       subtitle
@@ -24,7 +33,7 @@ export const graphQlQuery = `
       phone
     }
   }
-  headerCollection {
+  headerCollection(limit: 1) {
     items {
       title
       subtitle
@@ -59,13 +68,13 @@ export const graphQlQuery = `
       tags
     }
   }
-  seoCollection {
+  seoCollection(limit: 1) {
     items {
       title
       description
     }
   }
-  stackCollection {
+  stackCollection(limit: 1) {
     items {
       title
       subtitle

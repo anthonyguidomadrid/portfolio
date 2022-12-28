@@ -5,7 +5,7 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route>
-          <Route index element={<a href="/projects/atida">Go to Projects</a>} />
+          <Route index element={<div className="h-screen"><a href="/projects/atida">Go to Projects</a></div>} />
           <Route path="/projects/:id" element={<h1>Projects</h1>} />
           <Route path="*" element={<h1>404</h1>} />
         </Route>
