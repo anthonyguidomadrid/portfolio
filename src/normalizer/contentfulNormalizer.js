@@ -34,6 +34,10 @@ export const contentfulNormalizer = (response) => {
             },
             ctaText: response?.data?.headerCollection?.items?.[0]?.cta
         },
+        menu: {
+            menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,
+            cta: response?.data?.menuCollection?.items?.[0]?.cta
+        },
         projects: response?.data?.projectCollection?.items?.map(project => {
             return {
                 creationDate: dayjs(project.creationDate).format('MMMM YYYY'),

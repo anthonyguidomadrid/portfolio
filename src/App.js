@@ -10,9 +10,6 @@ import { graphQlQuery } from './graphQL/contentfulQuery'
 
 const App = () => {
   const [pageContent, setPageContent] = useState(null)
-  const menuItems = pageContent ? Object.keys(pageContent).filter(elm => {
-    return elm !== 'assets' && elm !== 'seo' && elm !== 'header'
-}) : []
 
   const fetchContent = useCallback(async () => {
     fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`, {
@@ -55,7 +52,8 @@ const App = () => {
         />
       </Helmet>
     </HelmetProvider>
-      {<Navigation logo={pageContent?.assets?.logo} menuItems={menuItems}/> }
+      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
+      {console.log('pageContent', pageContent)}
       <AppRoutes />
       <h1>Footer</h1>
     </>

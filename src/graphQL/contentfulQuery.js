@@ -44,6 +44,12 @@ export const graphQlQuery = `
       cta
     }
   }
+  menuCollection {
+    items {
+      menuItems
+      cta
+    }
+  }
   projectCollection {
     items {
       creationDate

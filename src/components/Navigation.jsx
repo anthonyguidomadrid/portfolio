@@ -1,7 +1,8 @@
 import { useState } from 'react'
 const classNames = require('classnames')
 
-export const Navigation = ({logo, menuItems}) => {
+export const Navigation = ({logo, menuItems, cta}) => {
+    console.log('menuItems', menuItems, 'cta', cta)
     const [isMenuOpen, setMenuOpen] = useState(false)
     const [ispageScrolled, setIsPageScrolled] = useState(false)
 
@@ -27,18 +28,12 @@ export const Navigation = ({logo, menuItems}) => {
             </div>
             <div className={classNames("w-full block flex-grow lg:flex lg:items-center lg:w-auto ", {hidden: !isMenuOpen})}>
                 <div className="text-sm lg:flex-grow">
-                {menuItems.includes('about') && <a href="/#about" className="block mt-4 lg:inline-block lg:mt-0 text-slate-200 hover:text-white mr-4">
-                    About
-                </a>}
-                {menuItems.includes('projects') && <a href="/#projects" className="block mt-4 lg:inline-block lg:mt-0 text-slate-200 hover:text-white mr-4">
-                    Projects
-                </a>}
-                {menuItems.includes('stack') && <a href="/#stack" className="block mt-4 lg:inline-block lg:mt-0 text-slate-200 hover:text-white mr-4">
-                    Stack
-                </a>}
+                {menuItems.map(item => {
+                    return <a href={`/#${item.toLowerCase().replace('', '')}`} className="block mt-4 lg:inline-block lg:mt-0 text-slate-200 hover:text-white mr-4">{item}</a>
+                })}
                 </div>
                 <div>
-                {menuItems.includes('contact') && <a href="/#contact" className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0">Contact</a>}
+                {cta && <a href={`/#${cta.toLowerCase().replace('', '')}`} className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 lg:mt-0">{cta}</a>}
                 </div>
             </div>
         </nav>
