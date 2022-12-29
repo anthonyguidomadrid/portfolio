@@ -39,7 +39,8 @@ export const contentfulNormalizer = (response) => {
                 url: response?.data?.headerCollection?.items?.[0]?.banner?.url,
                 description: response?.data?.headerCollection?.items?.[0]?.banner?.description
             },
-            ctaText: response?.data?.headerCollection?.items?.[0]?.cta
+            ctaText: response?.data?.headerCollection?.items?.[0]?.cta,
+            ctaLink: response?.data?.headerCollection?.items?.[0]?.ctaLink
         },
         menu: {
             menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,

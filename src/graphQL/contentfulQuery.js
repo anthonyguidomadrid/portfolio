@@ -48,9 +48,10 @@ export const graphQlQuery = `
         description
       }
       cta
+      ctaLink
     }
   }
-  menuCollection {
+  menuCollection(limit: 1) {
     items {
       menuItems
       cta
