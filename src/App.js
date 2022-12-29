@@ -3,13 +3,15 @@ import { Helmet, HelmetProvider } from 'react-helmet-async'
 import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
+import { graphQlQuery } from './graphQL/contentfulQuery'
 import { Navigation } from './components/Navigation'
 import { AppRoutes } from './routes/AppRoutes'
-import { graphQlQuery } from './graphQL/contentfulQuery'
+import { Footer } from './components/Footer'
 
 
 const App = () => {
   const [pageContent, setPageContent] = useState(null)
+  const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []
 
   const fetchContent = useCallback(async () => {
     fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`, {
@@ -53,9 +55,8 @@ const App = () => {
       </Helmet>
     </HelmetProvider>
       <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
-      {console.log('pageContent', pageContent)}
       <AppRoutes />
-      <h1>Footer</h1>
+      <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
     </>
   )
 }

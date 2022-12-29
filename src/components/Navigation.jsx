@@ -2,7 +2,6 @@ import { useState } from 'react'
 const classNames = require('classnames')
 
 export const Navigation = ({logo, menuItems, cta}) => {
-    console.log('menuItems', menuItems, 'cta', cta)
     const [isMenuOpen, setMenuOpen] = useState(false)
     const [ispageScrolled, setIsPageScrolled] = useState(false)
 
@@ -17,7 +16,7 @@ export const Navigation = ({logo, menuItems, cta}) => {
     window.onscroll = () => scrollFunction()
 
     return (
-        <nav className={classNames("flex items-center justify-between flex-wrap p-6 sticky top-0 transition ease-in-out delay-150", {'bg-black bg-opacity-80': ispageScrolled})}>
+        <nav className={classNames("flex items-center justify-between flex-wrap p-6 sticky top-0 transition ease-in-out delay-150", {'bg-slate-900 bg-opacity-80': ispageScrolled})}>
             <div className="flex items-center flex-shrink-0 text-white mr-6">
             <a href="/"><img src={logo?.url} alt={logo?.description} className="h-7 w-7"></img></a>
             </div>

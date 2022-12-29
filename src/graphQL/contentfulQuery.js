@@ -19,7 +19,13 @@ export const graphQlQuery = `
         url
         description
       }
-      
+      socialMediaCollection {
+        items {
+          url
+          title
+          description
+        }
+      }
     }
   } 
   contactCollection(limit: 1) {

@@ -15,8 +15,15 @@ export const contentfulNormalizer = (response) => {
         assets: {
             logo: {
                 url: response?.data?.assetsCollection?.items?.[0].logo?.url,
-                description: response?.data?.assetsCollection?.items?.[0].logo?.description
-            }
+                description: response?.data?.assetsCollection?.items?.[0]?.logo?.description
+            },
+            socialMedia: response?.data?.assetsCollection?.items?.[0]?.socialMediaCollection?.items?.map(elm => {
+                return {
+                    url: elm?.url,
+                    name: elm?.title,
+                    link: elm?.description
+                }
+            })
         },
         contact: {
             title: response?.data?.contactCollection?.items?.[0]?.title,
