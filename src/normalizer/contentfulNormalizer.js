@@ -3,7 +3,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 export const contentfulNormalizer = (response) => {
     return {
-        about: {
+        about: response.data?.aboutCollection?.items?.length ? {
             title: response?.data?.aboutCollection?.items?.[0]?.title,
             subtitle: response?.data?.aboutCollection?.items?.[0]?.subtitle,
             description: documentToHtmlString(response?.data?.aboutCollection?.items?.[0]?.description?.json),
@@ -11,7 +11,7 @@ export const contentfulNormalizer = (response) => {
                 url: response?.data?.aboutCollection?.items?.[0]?.image?.url,
                 description: response?.data?.aboutCollection?.items?.[0]?.image?.description
             }
-        },
+        } : {},
         assets: {
             logo: {
                 url: response?.data?.assetsCollection?.items?.[0].logo?.url,
