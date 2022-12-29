@@ -55,7 +55,7 @@ const App = () => {
       </Helmet>
     </HelmetProvider>
       <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
-      <AppRoutes />
+      <AppRoutes pageContent={pageContent}/>
       <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
     </>
   )
