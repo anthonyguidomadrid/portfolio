@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react"
-import { Helmet, HelmetProvider } from 'react-helmet-async'
 import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
+import { Seo } from './components/Seo'
 import { Navigation } from './components/Navigation'
 import { AppRoutes } from './routes/AppRoutes'
 import { Footer } from './components/Footer'
@@ -45,15 +45,7 @@ const App = () => {
 
   return (
     <>
-    <HelmetProvider>
-      <Helmet>
-        <title>{pageContent?.seo?.title}</title>
-        <meta
-          name="description"
-          content={pageContent?.seo?.description}
-        />
-      </Helmet>
-    </HelmetProvider>
+      <Seo seoPageContent={pageContent?.seo}/>
       <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
       <AppRoutes pageContent={pageContent}/>
       <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>

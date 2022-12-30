@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from './Button'
 const classNames = require('classnames')
 
 export const Navigation = ({logo, menuItems, cta}) => {
@@ -28,11 +29,12 @@ export const Navigation = ({logo, menuItems, cta}) => {
             <div className={classNames("w-full block flex-grow md:flex md:items-center md:w-auto ", {hidden: !isMenuOpen})}>
                 <div className="text-sm md:flex-grow">
                 {menuItems.map((item, idx) => {
-                    return <a key={idx} href={`/#${item.toLowerCase().replace('', '')}`} className="block mt-4 md:inline-block md:mt-0 text-slate-200 hover:text-white mr-4">{item}</a>
+                    const id = item.toLowerCase().replace(/\s/g, '')
+                    return <a key={idx} href={`./#${id}`} className="block mt-4 md:inline-block md:mt-0 text-slate-200 hover:text-white mr-4">{item}</a>
                 })}
                 </div>
                 <div>
-                {cta && <a href={`/#${cta.toLowerCase().replace('', '')}`} className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white mt-4 md:mt-0">{cta}</a>}
+                {cta && <Button text={cta} AdditionalClasses='mt-4 md:mt-0'/>}
                 </div>
             </div>
         </nav>

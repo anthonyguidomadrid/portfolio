@@ -6,7 +6,8 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
             </div>
             <div className="border-y border-slate-600 p-10 flex justify-center">
             {footerItems?.length && footerItems.map((item, idx) => {
-                return <a key={idx} href={`/#${item.toLowerCase().replace('', '')}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</a>
+                const id = item.toLowerCase().replace(/\s/g, '')
+                return <a key={idx} href={`./#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</a>
             })}
             </div>
             {socialMedia?.length && <div className="flex justify-center py-5">{socialMedia.map((elm, idx) => {
