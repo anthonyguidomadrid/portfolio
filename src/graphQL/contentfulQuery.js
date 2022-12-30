@@ -11,6 +11,10 @@ export const graphQlQuery = `
         url
         description
       }
+      cv {
+        url
+        title
+      }
     }
   }
   assetsCollection(limit: 1) {

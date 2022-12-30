@@ -10,6 +10,10 @@ export const contentfulNormalizer = (response) => {
             image: {
                 url: response?.data?.aboutCollection?.items?.[0]?.image?.url,
                 description: response?.data?.aboutCollection?.items?.[0]?.image?.description
+            },
+            cv: {
+                url: response?.data?.aboutCollection?.items?.[0]?.cv?.url,
+                text: response?.data?.aboutCollection?.items?.[0]?.cv?.title,
             }
         } : {},
         assets: {
