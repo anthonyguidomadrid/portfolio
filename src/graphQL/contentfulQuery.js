@@ -63,6 +63,7 @@ export const graphQlQuery = `
   }
   projectCollection {
     items {
+      id
       creationDate
       slug
       title

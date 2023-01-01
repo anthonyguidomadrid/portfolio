@@ -52,6 +52,7 @@ export const contentfulNormalizer = (response) => {
         },
         projects: response?.data?.projectCollection?.items?.map(project => {
             return {
+                id: project.id,
                 creationDate: dayjs(project.creationDate).format('MMMM YYYY'),
                 codeSourceLink: project.codeSourceLink,
                 slug: project.slug,
