@@ -50,29 +50,34 @@ export const contentfulNormalizer = (response) => {
             menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,
             cta: response?.data?.menuCollection?.items?.[0]?.cta
         },
-        projects: response?.data?.projectCollection?.items?.map(project => {
-            return {
-                id: project.id,
-                creationDate: dayjs(project.creationDate).format('MMMM YYYY'),
-                codeSourceLink: project.codeSourceLink,
-                slug: project.slug,
-                title: project.title,
-                subtitle: project.subtitle,
-                description: documentToHtmlString(project.description?.json),
-                thumbnail: {
-                    url: project.thumbnail?.url,
-                    description: project.thumbnail?.description
-                },
-                images: project.imagesCollection?.items?.map(image => {
-                    return {
-                        url: image.url,
-                        description: image.description
-                    }
-                }),
-                projectLink: project.link,
-                tags: project.tags
-            }
-        }),
+        project: response.data?.projectCollection?.items?.length ? {
+            title: response?.data?.projectHeaderCollection?.items?.[0].title,
+            subtitle: response?.data?.projectHeaderCollection?.items?.[0].subtitle,
+            projects: response?.data?.projectCollection?.items?.sort((a,b) => {
+                return new Date(b.creationDate) - new Date(a.creationDate);
+              }).map(project => {
+                return {
+                    creationDate: dayjs(project.creationDate).format('MMMM YYYY'),
+                    codeSourceLink: project.codeSourceLink,
+                    slug: project.slug,
+                    title: project.title,
+                    subtitle: project.subtitle,
+                    description: documentToHtmlString(project.description?.json),
+                    thumbnail: {
+                        url: project.thumbnail?.url,
+                        description: project.thumbnail?.description
+                    },
+                    images: project.imagesCollection?.items?.map(image => {
+                        return {
+                            url: image.url,
+                            description: image.description
+                        }
+                    }),
+                    projectLink: project.link,
+                    tags: project.tags
+                }
+            }),
+        } : {},
         seo: {
             title: response?.data?.seoCollection?.items?.[0]?.title,
             description: response?.data?.seoCollection?.items?.[0]?.description

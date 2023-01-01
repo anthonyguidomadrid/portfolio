@@ -63,7 +63,6 @@ export const graphQlQuery = `
   }
   projectCollection {
     items {
-      id
       creationDate
       slug
       title
@@ -84,6 +83,12 @@ export const graphQlQuery = `
       link
       codeSourceLink
       tags
+    }
+  }
+  projectHeaderCollection(limit: 1) {
+    items {
+      title
+      subtitle
     }
   }
   seoCollection(limit: 1) {
