@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react"
-import "./App.css"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
