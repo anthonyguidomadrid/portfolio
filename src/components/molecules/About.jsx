@@ -19,7 +19,7 @@ export const About = ({aboutContent}) => {
                     count = 0
                 }
             }
-            setInterval(cycleArray, 4000)
+            setInterval(cycleArray, 3000)
         }
     }, [subtitle])
 

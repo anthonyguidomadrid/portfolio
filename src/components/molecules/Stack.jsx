@@ -36,9 +36,9 @@ export const Stack = ({stackContent}) => {
                     const isOpen = isAccordionOpen?.[removeEmptySpaceAndHighCase(title)]
                     return (
                         <div key={idx} className={classNames({'border-b' : idx + 1 !== technologies.length })}>
-                            <div className={classNames('flex justify-between p-5 transition-all duration-500', { 'pb-10' : isOpen})}>
+                            <div onClick={() => handleAccordionClick(title)} className={classNames('flex justify-between p-5 transition-all duration-500', { 'pb-10' : isOpen})}>
                                 <p className='font-extrabold text-lg'>{title}</p>
-                                <button onClick={() => handleAccordionClick(title)}><Chevron className={classNames({'rotate-270' : isOpen})}/></button>
+                                <button><Chevron className={classNames({'rotate-270' : isOpen})}/></button>
                             </div>
                             {techList?.length > 0 && <div className={classNames('grid grid-flow-col gap-4 overflow-hidden transition-all max-h-0 duration-500 px-5', {'max-h-96 pb-5' : isOpen}, {'sm:grid-rows-3' : techList.length >= 3}, {'grid-rows-5' : techList.length >= 5}, {'grid-rows-2' : techList.length < 5})}>{techList.map((item, idx) => {
                                 return <span className='mb-5' key={idx}>{item}</span>
