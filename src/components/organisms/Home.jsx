@@ -7,9 +7,9 @@ export const Home = ({pageContent}) => {
     return (
         <>
             <Header headerContent={pageContent?.header}/>
-            {Object.keys(pageContent?.about).length > 0 && <About aboutContent={pageContent?.about}/>}
-            {Object.keys(pageContent?.project).length > 0 && <ProjectSlider projectContent={pageContent?.project}/>}
-            {Object.keys(pageContent?.stack).length > 0 && <Stack stackContent={pageContent?.stack}/>}
+            {pageContent?.about && <About aboutContent={pageContent?.about}/>}
+            {pageContent?.project && <ProjectSlider projectContent={pageContent?.project}/>}
+            {pageContent?.stack && <Stack stackContent={pageContent?.stack}/>}
         </>
     )
 }

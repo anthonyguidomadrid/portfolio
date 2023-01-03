@@ -3,7 +3,8 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 export const contentfulNormalizer = (response) => {
     return {
-        about: response.data?.aboutCollection?.items?.length ? {
+        ...(response.data?.aboutCollection?.items?.length && 
+            {about: {
             title: response?.data?.aboutCollection?.items?.[0]?.title,
             subtitle: response?.data?.aboutCollection?.items?.[0]?.subtitle,
             description: documentToHtmlString(response?.data?.aboutCollection?.items?.[0]?.description?.json),
@@ -15,7 +16,7 @@ export const contentfulNormalizer = (response) => {
                 url: response?.data?.aboutCollection?.items?.[0]?.cv?.url,
                 text: response?.data?.aboutCollection?.items?.[0]?.cv?.title,
             }
-        } : {},
+        }}),
         assets: {
             logo: {
                 url: response?.data?.assetsCollection?.items?.[0].logo?.url,
@@ -50,7 +51,7 @@ export const contentfulNormalizer = (response) => {
             menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,
             cta: response?.data?.menuCollection?.items?.[0]?.cta
         },
-        project: response.data?.projectCollection?.items?.length ? {
+        ...(response.data?.aboutCollection?.items?.length && {project: {
             title: response?.data?.projectHeaderCollection?.items?.[0].title,
             subtitle: response?.data?.projectHeaderCollection?.items?.[0].subtitle,
             projects: response?.data?.projectCollection?.items?.sort((a,b) => {
@@ -77,12 +78,12 @@ export const contentfulNormalizer = (response) => {
                     tags: project.tags
                 }
             }),
-        } : {},
+        }}),
         seo: {
             title: response?.data?.seoCollection?.items?.[0]?.title,
             description: response?.data?.seoCollection?.items?.[0]?.description
         },
-        stack: response?.data?.stackTechCollection?.items?.length > 0 ? {
+        ...(response?.data?.stackTechCollection?.items?.length > 0 && {stack: {
             title: response?.data?.stackCollection?.items?.[0]?.title,
             subtitle: response?.data?.stackCollection?.items?.[0]?.subtitle,
             technologies: response?.data?.stackTechCollection?.items?.map(item => {
@@ -93,6 +94,6 @@ export const contentfulNormalizer = (response) => {
             }).sort((a, b) => {
                 return a.title.localeCompare(b.title)
             })
-        } : {}
+        }})
     }
 }
