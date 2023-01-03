@@ -26,7 +26,7 @@ export const About = ({aboutContent}) => {
 
     return (
     <section className="md:flex" id={id}>
-        <div style={{backgroundImage: `url(${image?.url ?? '../../default-banner-image.jpeg'})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className="md:w-1/2 h-96"></div>
+        <div style={{backgroundImage: `url(${image?.url ?? '../../default-banner-image.jpeg'})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className="md:w-1/2 h-96 md:h-auto"></div>
         <div className="md:w-1/2 bg-slate-900 p-10 flex justify-center text-white flex-col">
             <h2 className="uppercase font-bold text-xl">{title}</h2>
             <p className={'transition duration-500 ease-in-out font-mono text-4xl text-gray-100 my-5'}>{skill}</p>
