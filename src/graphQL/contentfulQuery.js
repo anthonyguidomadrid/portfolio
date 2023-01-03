@@ -101,11 +101,12 @@ export const graphQlQuery = `
     items {
       title
       subtitle
-      languages
-      tools
-      libraries
-      frameworks
-      services
+    }
+  }
+  stackTechCollection {
+    items {
+      title
+      technologies
     }
   }
 }

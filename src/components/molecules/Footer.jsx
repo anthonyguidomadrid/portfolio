@@ -1,3 +1,5 @@
+import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
+
 export const Footer = ({logo, footerItems, socialMedia}) => {
     return (
         <div className="bg-slate-900 text-white px-10 md:px-24">
@@ -6,7 +8,7 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
             </div>
             <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
             {footerItems?.length && footerItems.map((item, idx) => {
-                const id = item.toLowerCase().replace(/\s/g, '')
+                const id = removeEmptySpaceAndHighCase(item)
                 return <a key={idx} href={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</a>
             })}
             </div>

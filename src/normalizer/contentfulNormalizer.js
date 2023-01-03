@@ -82,14 +82,17 @@ export const contentfulNormalizer = (response) => {
             title: response?.data?.seoCollection?.items?.[0]?.title,
             description: response?.data?.seoCollection?.items?.[0]?.description
         },
-        stack: {
+        stack: response?.data?.stackTechCollection?.items?.length > 0 ? {
             title: response?.data?.stackCollection?.items?.[0]?.title,
             subtitle: response?.data?.stackCollection?.items?.[0]?.subtitle,
-            languages: response?.data?.stackCollection?.items?.[0]?.languages,
-            tools: response?.data?.stackCollection?.items?.[0]?.tools,
-            libraries: response?.data?.stackCollection?.items?.[0]?.libraries,
-            frameworks: response?.data?.stackCollection?.items?.[0]?.frameworks,
-            services: response?.data?.stackCollection?.items?.[0]?.services
-        }
+            technologies: response?.data?.stackTechCollection?.items?.map(item => {
+                return {
+                    title: item?.title,
+                    techList: item?.technologies
+                }
+            }).sort((a, b) => {
+                return a.title.localeCompare(b.title)
+            })
+        } : {}
     }
 }

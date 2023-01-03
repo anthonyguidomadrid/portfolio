@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from "react"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
-import { Seo } from './components/Seo'
-import { Navigation } from './components/Navigation'
+import { Seo } from './components/atoms/Seo'
+import { Navigation } from './components/molecules/Navigation'
 import { AppRoutes } from './routes/AppRoutes'
-import { Footer } from './components/Footer'
+import { Footer } from './components/molecules/Footer'
 
 
 const App = () => {

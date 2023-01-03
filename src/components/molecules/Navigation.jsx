@@ -1,6 +1,7 @@
 import { useState } from 'react'
-import { Button } from './Button'
-const classNames = require('classnames')
+import { Button } from '../atoms/Button'
+import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
+import classNames from 'classnames'
 
 export const Navigation = ({logo, menuItems, cta}) => {
     const [isMenuOpen, setMenuOpen] = useState(false)
@@ -29,7 +30,7 @@ export const Navigation = ({logo, menuItems, cta}) => {
             <div className={classNames("w-full block flex-grow md:flex md:items-center md:w-auto ", {hidden: !isMenuOpen})}>
                 <div className="text-sm md:flex-grow">
                 {menuItems.map((item, idx) => {
-                    const id = item.toLowerCase().replace(/\s/g, '')
+                    const id = removeEmptySpaceAndHighCase(item)
                     return <a key={idx} href={`/#${id}`} className="block mt-4 md:inline-block md:mt-0 text-slate-200 hover:text-white mr-4">{item}</a>
                 })}
                 </div>
