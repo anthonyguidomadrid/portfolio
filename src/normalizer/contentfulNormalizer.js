@@ -30,13 +30,13 @@ export const contentfulNormalizer = (response) => {
                 }
             })
         },
-        contact: {
+        ...(response.data?.contactCollection?.items?.length && {contact: {
             title: response?.data?.contactCollection?.items?.[0]?.title,
             subtitle: response?.data?.contactCollection?.items?.[0]?.subtitle,
             description: documentToHtmlString(response?.data?.contactCollection?.items?.[0]?.description?.json),
             email: response?.data?.contactCollection?.items?.[0]?.email,
             phone: response?.data?.contactCollection?.items?.[0]?.phone
-        },
+        }}),
         header: {
             title: response?.data?.headerCollection?.items?.[0]?.title,
             subtitle: response?.data?.headerCollection?.items?.[0]?.subtitle,

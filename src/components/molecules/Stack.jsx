@@ -25,12 +25,12 @@ export const Stack = ({stackContent}) => {
     }
 
     return (
-        <section className='bg-slate-900 text-white px-10 md:px-24'>
+        <section className='bg-slate-900 text-white px-10 md:px-36 lg:px-48 xl:px-80 transition-all duration-500'>
             {title && <div id={id} className='text-center py-14'>
                 <h2 className='uppercase font-bold text-xl'>{title}</h2>
-                {subtitle && <p className='font-mono font-semibold md:text-2xl mt-7'>{subtitle}</p>}
+                {subtitle && <p className='font-mono text-2xl text-gray-100 md:my-5 md:mx-24 mt-7'>{subtitle}</p>}
             </div>}
-            <div className="flex flex-col lg:px-24 transition-all duration-500">
+            <div className="flex flex-col pb-16">
                 {isAccordionOpen && technologies?.map((item, idx) => {
                     const { title, techList } = item
                     const isOpen = isAccordionOpen?.[removeEmptySpaceAndHighCase(title)]
