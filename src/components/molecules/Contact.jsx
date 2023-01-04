@@ -55,7 +55,9 @@ export const Contact = ({contactContent}) => {
                 </div>}
             </div>
             <div className="md:w-1/2 order-1">
-            <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100' : isFormSuccessfullySubmitted}, {'bg-rose-100' : isFormSuccessfullySubmitted === false})}>Your message has been successfully sent! We will reply you as soon as possible. Thank you for your enquiry!</p>
+            <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100' : isFormSuccessfullySubmitted}, {'bg-rose-100' : isFormSuccessfullySubmitted === false})}>
+                {isFormSuccessfullySubmitted ? 'Your message has been successfully sent! We will reply you as soon as possible. Thank you for your enquiry!' : 'There was an error sending your message, please try again.'}
+            </p>
             <form className="flex flex-col p-10 xl:mx-20 text-sm" onSubmit={(e) => handleFormSubmit(e)}>
                 <label>
                     <input
