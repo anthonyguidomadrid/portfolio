@@ -8,13 +8,14 @@ import emailjs from 'emailjs-com'
 export const Contact = ({contactContent}) => {
     const { title, subtitle, description, email, phone } = contactContent
     const id = removeEmptySpaceAndHighCase(title)
-    const [ formData, setFormData ] = useState({
+    const [formData, setFormData] = useState({
             name: '',
             email: '',
             subject: '',
             message: ''
     })
     const [isFormSuccessfullySubmitted, setFormSuccessfullySubmitted] = useState(undefined)
+    const [isFormLoading, setIsFormLoading] = useState(false)
     const isFormFullyFilled = useMemo(() => {
         if (formData.name && formData.email && formData.subject && formData.message) {
             return true
@@ -25,6 +26,7 @@ export const Contact = ({contactContent}) => {
 
     const handleFormSubmit = useCallback(async (e) => {
         e.preventDefault()
+        setIsFormLoading(true)
         await emailjs.send(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, formData, process.env.REACT_APP_EMAILJS_USER_ID)
         .then(() => {
             setFormSuccessfullySubmitted(true)
@@ -34,8 +36,10 @@ export const Contact = ({contactContent}) => {
                 subject: '',
                 message: ''
             })
+            setIsFormLoading(false)
         }, () => {
             setFormSuccessfullySubmitted(false)
+            setIsFormLoading(false)
         })
     }, [formData])
 
@@ -55,52 +59,55 @@ export const Contact = ({contactContent}) => {
                 </div>}
             </div>
             <div className="md:w-1/2 order-1">
-            <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100' : isFormSuccessfullySubmitted}, {'bg-rose-100' : isFormSuccessfullySubmitted === false})}>
-                {isFormSuccessfullySubmitted ? 'Your message has been successfully sent! We will reply you as soon as possible. Thank you for your enquiry!' : 'There was an error sending your message, please try again.'}
-            </p>
-            <form className="flex flex-col p-10 xl:mx-20 text-sm" onSubmit={(e) => handleFormSubmit(e)}>
-                <label>
-                    <input
-                    type="text" 
-                    placeholder='Name'
-                    className='w-full border-b border-gray-500 h-10'
-                    value={formData.name}
-                    onChange={e => setFormData({...formData, name: e?.target?.value})}
+                <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100' : isFormSuccessfullySubmitted}, {'bg-rose-100' : isFormSuccessfullySubmitted === false})}>
+                    {isFormSuccessfullySubmitted ? 'Your message has been successfully sent! We will reply you as soon as possible. Thank you for your enquiry!' : 'There was an error sending your message, please try again.'}
+                </p>
+                <form className="flex flex-col p-10 xl:mx-20 text-sm" onSubmit={(e) => handleFormSubmit(e)}>
+                    <label>
+                        <input
+                        type="text" 
+                        placeholder='Name'
+                        className='w-full border-b border-gray-500 h-10'
+                        value={formData.name}
+                        onChange={e => setFormData({...formData, name: e?.target?.value})}
+                        />
+                    </label>
+                    <label>
+                        <input
+                        type="email" 
+                        placeholder='Email'
+                        className='w-full border-b border-gray-500 h-10'
+                        value={formData.email}
+                        onChange={e => setFormData({...formData, email: e?.target?.value})}
+                        disabled={isFormLoading}
+                        />
+                    </label>
+                    <label>
+                        <input
+                        type="text" 
+                        placeholder='Subject'
+                        className='w-full border-b border-gray-500 h-10'
+                        value={formData.subject}
+                        onChange={e => setFormData({...formData, subject: e?.target?.value})}
+                        disabled={isFormLoading}
+                        />
+                    </label>
+                    <label>
+                        <textarea
+                        type="text" 
+                        placeholder='Message'
+                        className='w-full border-b border-gray-500 align-top h-36 pt-2'
+                        value={formData.message}
+                        onChange={e => setFormData({...formData, message: e?.target?.value})}
+                        disabled={isFormLoading}
+                        />
+                    </label>
+                    <input 
+                        type="submit" 
+                        className={classNames('px-4 py-2 leading-none uppercase my-5 border', {'text-gray-700 border-gray-700 hover:bg-gray-800 hover:text-white' : isFormFullyFilled}, {'text-gray-400 border-gray-400' : !isFormFullyFilled || isFormLoading})}
+                        disabled={!isFormFullyFilled || isFormLoading}
                     />
-                </label>
-                <label>
-                    <input
-                    type="email" 
-                    placeholder='Email'
-                    className='w-full border-b border-gray-500 h-10'
-                    value={formData.email}
-                    onChange={e => setFormData({...formData, email: e?.target?.value})}
-                    />
-                </label>
-                <label>
-                    <input
-                    type="text" 
-                    placeholder='Subject'
-                    className='w-full border-b border-gray-500 h-10'
-                    value={formData.subject}
-                    onChange={e => setFormData({...formData, subject: e?.target?.value})}
-                    />
-                </label>
-                <label>
-                    <textarea
-                    type="text" 
-                    placeholder='Message'
-                    className='w-full border-b border-gray-500 align-top h-36 pt-2'
-                    value={formData.message}
-                    onChange={e => setFormData({...formData, message: e?.target?.value})} 
-                    />
-                </label>
-                <input 
-                    type="submit" 
-                    className={classNames('px-4 py-2 leading-none uppercase my-5 border', {'text-gray-700 border-gray-700 hover:bg-gray-800 hover:text-white' : isFormFullyFilled}, {'text-gray-400 border-gray-400' : !isFormFullyFilled})}
-                    disabled={!isFormFullyFilled}
-                />
-            </form>
+                </form>
             </div>
         </section>
     )
