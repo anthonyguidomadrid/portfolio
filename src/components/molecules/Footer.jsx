@@ -1,4 +1,5 @@
 import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
+import { HashLink as Link } from 'react-router-hash-link'
 
 export const Footer = ({logo, footerItems, socialMedia}) => {
     return (
@@ -9,7 +10,7 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
             <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
             {footerItems?.length && footerItems.map((item, idx) => {
                 const id = removeEmptySpaceAndHighCase(item)
-                return <a key={idx} href={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</a>
+                return <Link key={idx} to={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</Link>
             })}
             </div>
             {socialMedia?.length && <div className="flex justify-center py-5">{socialMedia.map((elm, idx) => {
@@ -17,7 +18,7 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
                 })}</div>}
             <div className="flex items-center justify-between py-5">
                 <p className="text-xs">Copyright © 2023 Anthony Guido</p>
-                <a href="https://github.com/anthonyguidomadrid/portfolio" className="text-xs uppercase">Source code</a>
+                <a href="https://github.com/anthonyguidomadrid/portfolio" target="_blank" rel="noreferrer"  className="text-xs uppercase">Source code</a>
             </div>
         </div>
     )

@@ -31,7 +31,7 @@ export const About = ({aboutContent}) => {
             <h2 className="uppercase font-bold text-xl">{title}</h2>
             <p className={'font-mono text-4xl text-gray-100 my-5 lg:pb-5'}>{skill}</p>
             <div dangerouslySetInnerHTML={{ __html: description }} />
-            {cv?.url && <div className='lg:py-10 transition-all duration-500'><Button text={cv?.text ?? 'Download'} link={cv?.url} newTab={true} AdditionalClasses={'uppercase mt-5'}/></div>}
+            {cv?.url && <div className='lg:py-10 transition-all duration-500'><Button text={cv?.text ?? 'Download'} link={cv?.url} newTab={true} additionalClasses={'uppercase mt-5'}/></div>}
         </div>
     </section>
     )

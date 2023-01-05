@@ -3,14 +3,10 @@ import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
 import { Seo } from './components/atoms/Seo'
-import { Navigation } from './components/molecules/Navigation'
 import { AppRoutes } from './routes/AppRoutes'
-import { Footer } from './components/molecules/Footer'
-
 
 const App = () => {
   const [pageContent, setPageContent] = useState(null)
-  const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []
 
   const fetchContent = useCallback(async () => {
     fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`, {
@@ -45,9 +41,7 @@ const App = () => {
   return (
     <>
       <Seo seoPageContent={pageContent?.seo}/>
-      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
       <AppRoutes pageContent={pageContent}/>
-      <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
     </>
   )
 }
