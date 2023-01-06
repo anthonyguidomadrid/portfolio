@@ -4,6 +4,8 @@ import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
 import { Seo } from './components/atoms/Seo'
 import { AppRoutes } from './routes/AppRoutes'
+import ReactGA from 'react-ga'
+ReactGA.initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID)
 
 const App = () => {
   const [pageContent, setPageContent] = useState(null)
@@ -27,6 +29,10 @@ const App = () => {
   useEffect(() => {
     fetchContent()
   }, [fetchContent])
+
+  useEffect(() => {
+    ReactGA.pageview(window?.location?.pathname + window?.location?.search);
+  }, [])
 
   if (!pageContent) {
     return (
