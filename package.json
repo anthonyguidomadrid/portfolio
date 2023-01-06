@@ -1,6 +1,7 @@
 {
   "name": "portfolio",
-  "homePage": "anthonyguidomadrid.github.io/portfolio/",
+  "baseURL": "https://anthonyguidomadrid.github.io/portfolio/",
+  "homePage": "https://anthonyguidomadrid.github.io/portfolio/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
