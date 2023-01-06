@@ -95,6 +95,15 @@ export const graphQlQuery = `
     items {
       title
       description
+      appleTouchIcon {
+        url
+      }
+      favicon {
+        url
+      }
+      thumbnail {
+        url
+      }
     }
   }
   stackCollection(limit: 1) {

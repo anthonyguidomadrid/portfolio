@@ -24,10 +24,10 @@ export const ProjectDetail = ({projectContent}) => {
                 </Splide>}
             </div>
             <div className="md:w-1/2 p-10 flex justify-center flex-col">
-                <p className='text-sm pb-3'>{creationDate}</p>
-                <h2 className="uppercase font-bold text-xl">{title}</h2>
-                <p className={'font-mono text-2xl lg:text-3xl text-gray-500 my-5 lg:pb-5'}>{subtitle}</p>
-                <div dangerouslySetInnerHTML={{ __html: description }} />
+                {creationDate && <p className='text-sm pb-3'>{creationDate}</p>}
+                {title && <h2 className="uppercase font-bold text-xl">{title}</h2>}
+                {subtitle && <p className={'font-mono text-2xl lg:text-3xl text-gray-500 my-5 lg:pb-5'}>{subtitle}</p>}
+                {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
                 <div className='flex py-5'>
                     {projectLink && <Button text={'See Project'} link={projectLink} newTab={true} additionalClasses={'uppercase mr-4'} variant={'black'}/>}
                     {codeSourceLink && <Button text={'See Code'} link={codeSourceLink} newTab={true} additionalClasses={'uppercase'} variant={'black'}/>}

@@ -81,7 +81,10 @@ export const contentfulNormalizer = (response) => {
         }}),
         seo: {
             title: response?.data?.seoCollection?.items?.[0]?.title,
-            description: response?.data?.seoCollection?.items?.[0]?.description
+            description: response?.data?.seoCollection?.items?.[0]?.description,
+            touchIcon: response?.data?.seoCollection?.items?.[0]?.appleTouchIcon?.url,
+            favicon: response?.data?.seoCollection?.items?.[0]?.favicon?.url,
+            thumbnail: response?.data?.seoCollection?.items?.[0]?.thumbnail?.url
         },
         ...(response?.data?.stackTechCollection?.items?.length > 0 && {stack: {
             title: response?.data?.stackCollection?.items?.[0]?.title,
