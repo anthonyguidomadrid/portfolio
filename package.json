@@ -1,8 +1,8 @@
 {
   "name": "portfolio",
+  "homePage": "https://github.com/anthonyguidomadrid/portfolio",
   "version": "0.1.0",
   "private": true,
-  "homePage": "https://github.com/anthonyguidomadrid/portfolio",
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^16.0.2",
     "@splidejs/react-splide": "^0.7.12",
