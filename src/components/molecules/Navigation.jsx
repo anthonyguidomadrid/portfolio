@@ -23,7 +23,7 @@ export const Navigation = ({logo, menuItems, cta}) => {
     return (
         <nav className={classNames("flex items-center justify-between flex-wrap p-6 fixed top-0 w-full z-50", {'bg-slate-900 bg-opacity-80': ispageScrolled || isMenuOpen})}>
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-            <a href="/"><img src={logo?.url} alt={logo?.description} className="h-7 w-7"></img></a>
+            <Link to="/"><img src={logo?.url} alt={logo?.description} className="h-7 w-7"></img></Link>
             </div>
             <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border text-white border-white-400 hover:text-white hover:border-white" onClick={() => setMenuOpen(!isMenuOpen)}>

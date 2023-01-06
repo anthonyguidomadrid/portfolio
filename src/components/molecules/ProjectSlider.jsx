@@ -1,6 +1,7 @@
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
+import { HashLink as Link } from 'react-router-hash-link'
 
 export const ProjectSlider = ({projectContent}) => {
     const {title, subtitle} = projectContent
@@ -16,7 +17,7 @@ export const ProjectSlider = ({projectContent}) => {
                     const { thumbnail, creationDate, slug, title, tags } = project
                     return (
                             <SplideSlide key={idx}>
-                                <a href={`/projects/${slug}`}>
+                                <Link to={`/projects/${slug}`}>
                                     <div style={{backgroundImage: `url(${thumbnail?.url ?? '../../default-banner-image.jpeg'})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className="text-white px-20 h-96 flex flex-col justify-center drop-shadow transition-transform duration-500 hover:opacity-95">
                                         {creationDate && <p className='mb-2'>{creationDate}</p>}
                                         {title && <h4 className='text-2xl sm:text-3xl lg:text-4xl font-bold font-mono mb-6'>{title}</h4>}
@@ -24,7 +25,7 @@ export const ProjectSlider = ({projectContent}) => {
                                             return <span key={idx} className='text-sm font-medium'>{tag}</span>
                                         })}</div>}
                                     </div>
-                                </a>
+                                </Link>
                             </SplideSlide>
                     )
                 })}  

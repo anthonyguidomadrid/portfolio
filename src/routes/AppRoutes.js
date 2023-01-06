@@ -9,14 +9,12 @@ export const AppRoutes = ({pageContent}) => {
     const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []
     
     return (
-    <BrowserRouter basename={process.env.REACT_APP_BASE_URL}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
       <Routes>
-        <Route>
-          <Route index element={<Home pageContent={pageContent}/>} />
-          <Route path="/projects/:id" element={<ProjectPage projectsContent={pageContent?.project?.projects} />} />
-          <Route path="*" element={<h1>404</h1>} />
-        </Route>
+          <Route exact path="/" element=<Home pageContent={pageContent}/>/>
+          <Route exact path="/projects/:id" element=<ProjectPage projectsContent={pageContent?.project?.projects} /> />
+          {/* <Route path="*" element={<h1>404</h1>} /> */}
       </Routes>
       <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
     </BrowserRouter>
