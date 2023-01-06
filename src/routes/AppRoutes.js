@@ -6,8 +6,7 @@ import { Footer } from '../components/molecules/Footer'
 
 
 export const AppRoutes = ({pageContent}) => {
-    const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []
-    
+    const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []    
     return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
