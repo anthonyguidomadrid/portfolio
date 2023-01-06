@@ -1,6 +1,19 @@
-# Getting Started with Create React App
+# Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Contentful was used as a CMS for all the content displayed.
+
+## Previews
+![screenshot1](https://user-images.githubusercontent.com/80059432/211064460-9f57ac9f-f6f7-4d72-a238-6468af1102fc.jpg)
+
+![screenshot2](https://user-images.githubusercontent.com/80059432/211064470-9d770925-438e-4cf3-bed2-d283f1936ea8.jpg)
+
+## Variables
+`REACT_APP_CONTENTFUL_SPACE_ID=` [https://www.contentful.com/help/find-space-id/](https://www.contentful.com/help/find-space-id/)\
+`REACT_APP_CONTENTFUL_ACCESS_TOKEN=` [https://www.contentful.com/developers/docs/concepts/apis/](https://www.contentful.com/developers/docs/concepts/apis/)\
+`REACT_APP_EMAILJS_SERVICE_ID=`\
+`REACT_APP_EMAILJS_TEMPLATE_ID=`\
+`REACT_APP_EMAILJS_USER_ID=`\
+[EmailJS Documentation](https://www.emailjs.com/docs/sdk/send/)
 
 ## Available Scripts
 
@@ -14,57 +27,159 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `npm run deploy`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
+Builds the app for production and deploy to [https://anthonyguido.dev/](https://anthonyguido.dev/) via Github Pages.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Libraries
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Here is the list of the libraries installed for this project:
+* `classnames`
+* `dayjs`
+* `emailjs-com`
+* `react-router-dom`
+* `react-router-hash-link`
+* `react-scripts`
+* `react-spinners`
+* `tailwind`
 
-### `npm run eject`
+## Contentful Content Models
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```
+{
+  aboutCollection(limit: 1) {
+    items {
+      title: string
+      subtitle: string[]
+      description {
+        json
+      }
+      image {
+        url: string
+        description: string
+      }
+      cv {
+        url: string
+        title: string
+      }
+    }
+  }
+  assetsCollection(limit: 1) {
+    items {
+      logo {
+        url: string
+        description: string
+      }
+      socialMediaCollection {
+        items {
+          url: string
+          title: string
+          description: string
+        }
+      }
+    }
+  } 
+  contactCollection(limit: 1) {
+    items {
+      title: string
+      subtitle: string
+      description {
+        json
+      }
+      email: string
+      phone: string
+    }
+  }
+  headerCollection(limit: 1) {
+    items {
+      title: string
+      subtitle: string
+      banner {
+        url: string
+        description: string
+      }
+      cta: string
+      ctaLink: string
+    }
+  }
+  menuCollection(limit: 1) {
+    items {
+      menuItems: string[]
+      cta: string
+    }
+  }
+  projectCollection {
+    items {
+      creationDate: Date
+      slug: string
+      title: string
+      subtitle: string
+      description {
+        json
+      }
+      thumbnail {
+        url: string
+        description: string
+      }
+      imagesCollection {
+        items {
+          url: string
+          description: string
+        }
+      }
+      link: string
+      codeSourceLink: string
+      tags: string[]
+    }
+  }
+  projectHeaderCollection(limit: 1) {
+    items {
+      title: string
+      subtitle: string
+    }
+  }
+  seoCollection(limit: 1) {
+    items {
+      title: string
+      description: string
+      appleTouchIcon {
+        url: string
+      }
+      favicon {
+        url: string
+      }
+      thumbnail {
+        url: string
+      }
+    }
+  }
+  stackCollection(limit: 1) {
+    items {
+      title: string
+      subtitle: string
+    }
+  }
+  stackTechCollection {
+    items {
+      title: string
+      technologies: string[]
+    }
+  }
+}
+```
 
 ### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This app is currently deployed on this domain: [https://anthonyguido.dev/](https://anthonyguido.dev/)
 
-### `npm run build` fails to minify
+## Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Anthony Guido**
+
+- Github: [@anthonyguidomadrid](https://github.com/anthonyguidomadrid/)
+- LinkedIn: [@anthony-guido](https://www.linkedin.com/in/anthony-guido/)
+
+## License
+
+Copyright © 2021 [Anthony Guido](https://github.com/anthonyguidomadrid/).
