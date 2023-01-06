@@ -38,7 +38,7 @@ export const Navigation = ({logo, menuItems, cta}) => {
                 })}
                 </div>
                 <div>
-                {cta && <Button text={cta} additionalClasses='mt-4 md:mt-0'/>}
+                {cta && <Link to={`/#${removeEmptySpaceAndHighCase(cta)}`} className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white" onClick={() => setMenuOpen(false)}>{cta}</Link>}
                 </div>
             </div>
         </nav>
