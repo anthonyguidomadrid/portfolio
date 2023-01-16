@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 
 export const contentfulNormalizer = (response) => {
+
     return {
         ...(response.data?.aboutCollection?.items?.length && 
             {about: {
@@ -37,16 +38,21 @@ export const contentfulNormalizer = (response) => {
             email: response?.data?.contactCollection?.items?.[0]?.email,
             phone: response?.data?.contactCollection?.items?.[0]?.phone
         }}),
-        header: {
-            title: response?.data?.headerCollection?.items?.[0]?.title,
-            subtitle: response?.data?.headerCollection?.items?.[0]?.subtitle,
-            image: {
-                url: response?.data?.headerCollection?.items?.[0]?.banner?.url,
-                description: response?.data?.headerCollection?.items?.[0]?.banner?.description
-            },
-            ctaText: response?.data?.headerCollection?.items?.[0]?.cta,
-            ctaLink: response?.data?.headerCollection?.items?.[0]?.ctaLink
-        },
+        ...(response?.data?.headerCollection?.items?.length && {
+            headers: response?.data?.headerCollection?.items?.map(header => {
+                return {
+                    title: header.title,
+                    subtitle: header.subtitle,
+                    image: {
+                        url: header.banner?.url,
+                        description: header.banner?.description
+                    },
+                    ctaText: header.cta,
+                    ctaLink: header.ctaLink,
+                    type: header.type
+                }
+            })
+        }),
         menu: {
             menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,
             cta: response?.data?.menuCollection?.items?.[0]?.cta

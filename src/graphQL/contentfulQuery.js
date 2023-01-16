@@ -43,7 +43,7 @@ export const graphQlQuery = `
       phone
     }
   }
-  headerCollection(limit: 1) {
+  headerCollection(limit: 2) {
     items {
       title
       subtitle
@@ -53,6 +53,7 @@ export const graphQlQuery = `
       }
       cta
       ctaLink
+      type
     }
   }
   menuCollection(limit: 1) {

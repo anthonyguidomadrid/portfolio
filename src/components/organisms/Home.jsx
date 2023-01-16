@@ -7,7 +7,7 @@ import { Contact } from '../molecules/Contact'
 export const Home = ({pageContent}) => {
     return (
         <>
-            <Header headerContent={pageContent?.header}/>
+            <Header headerContent={pageContent?.headers.find(header => header.type === 'home')}/>
             {pageContent?.about && <About aboutContent={pageContent?.about}/>}
             {pageContent?.project && <ProjectSlider projectContent={pageContent?.project}/>}
             {pageContent?.stack && <Stack stackContent={pageContent?.stack}/>}
