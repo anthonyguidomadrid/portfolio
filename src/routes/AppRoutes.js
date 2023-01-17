@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { Home } from '../components/organisms/Home'
 import { ProjectPage } from '../components/organisms/ProjectPage'
 import { NotFound } from '../components/organisms/NotFound'
@@ -14,7 +14,8 @@ export const AppRoutes = ({pageContent}) => {
       <Routes>
           <Route exact path="/" element=<Home pageContent={pageContent}/>/>
           <Route exact path="/projects/:id" element=<ProjectPage projectsContent={pageContent?.project?.projects} /> />
-          <Route path="*" element={<NotFound headerContent={pageContent?.headers}/>} />
+          <Route path='/404' element={<NotFound headerContent={pageContent?.headers}/>} />
+          <Route path='*' element={<Navigate replace to='/404'/>} />
       </Routes>
       <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
     </BrowserRouter>
