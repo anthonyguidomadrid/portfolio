@@ -10,7 +10,7 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
             <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
             {footerItems?.length && footerItems.map((item, idx) => {
                 const id = removeEmptySpaceAndHighCase(item)
-                return <Link key={idx} to={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</Link>
+                return <Link key={idx} smooth to={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</Link>
             })}
             </div>
             {socialMedia?.length && <div className="flex justify-center py-5">{socialMedia.map((elm, idx) => {

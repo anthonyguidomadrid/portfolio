@@ -33,11 +33,11 @@ export const Navigation = ({logo, menuItems, cta}) => {
                 <div className="text-sm md:flex-grow">
                 {menuItems.map((item, idx) => {
                     const id = removeEmptySpaceAndHighCase(item)
-                    return <Link key={idx} to={`/#${id}`} className="block mt-4 md:inline-block md:mt-0 text-slate-200 hover:text-white mr-4" onClick={() => setMenuOpen(false)}>{item}</Link>
+                    return <Link key={idx} smooth to={`/#${id}`} className="block mt-4 md:inline-block md:mt-0 text-slate-200 hover:text-white mr-4" onClick={() => setMenuOpen(false)}>{item}</Link>
                 })}
                 </div>
                 <div>
-                {cta && <Link to={`/#${removeEmptySpaceAndHighCase(cta)}`} className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white" onClick={() => setMenuOpen(false)}>{cta}</Link>}
+                {cta && <Link smooth to={`/#${removeEmptySpaceAndHighCase(cta)}`} className="inline-block text-sm px-4 py-2 leading-none border text-white border-white hover:border-transparent hover:text-black hover:bg-white" onClick={() => setMenuOpen(false)}>{cta}</Link>}
                 </div>
             </div>
         </nav>
