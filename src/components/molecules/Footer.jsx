@@ -5,7 +5,7 @@ export const Footer = ({logo, footerItems, socialMedia}) => {
     return (
         <div className="bg-slate-900 text-white px-10 md:px-24">
             <div className="py-10">
-                <img src={logo?.url} alt={logo?.description} className="mx-auto h-12 w-12"></img>
+                <Link smooth to={'/#top'}><img src={logo?.url} alt={logo?.description} className="mx-auto h-12 w-12"></img></Link>
             </div>
             <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
             {footerItems?.length && footerItems.map((item, idx) => {
