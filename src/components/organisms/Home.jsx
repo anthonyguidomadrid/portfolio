@@ -11,13 +11,14 @@ export const Home = ({pageContent, setLocale}) => {
     useEffect(() => {
         setLocale(locale)
     }, [locale, setLocale])
+
     return (
         <>
             <Header headerContent={pageContent?.headers.find(header => header.type === 'home')} locale={locale}/>
-            {pageContent?.about && <About aboutContent={pageContent?.about}/>}
+            {pageContent?.about && <About aboutContent={pageContent?.about} locale={locale} translations={pageContent?.translations}/>}
             {pageContent?.project && <ProjectSlider projectContent={pageContent?.project}/>}
             {pageContent?.stack && <Stack stackContent={pageContent?.stack}/>}
-            {pageContent?.contact && <Contact contactContent={pageContent?.contact}/>}
+            {pageContent?.contact && <Contact contactContent={pageContent?.contact} translations={pageContent?.translations}/>}
         </>
     )
 }

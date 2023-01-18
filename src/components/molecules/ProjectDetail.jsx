@@ -1,7 +1,8 @@
 import { Button } from '../atoms/Button'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
+import { getTranslationFromString } from '../../helpers/getTranslationFromString'
 
-export const ProjectDetail = ({projectContent}) => {
+export const ProjectDetail = ({projectContent, translations}) => {
     const { codeSourceLink, creationDate, description, images, projectLink, tags, title, subtitle} = projectContent
 
     return (
@@ -29,8 +30,8 @@ export const ProjectDetail = ({projectContent}) => {
                 {subtitle && <p className={'font-mono text-2xl lg:text-3xl text-gray-500 my-5 lg:pb-5'}>{subtitle}</p>}
                 {description && <div dangerouslySetInnerHTML={{ __html: description }} />}
                 <div className='flex py-5'>
-                    {projectLink && <Button text={'See Project'} link={projectLink} newTab={true} additionalClasses={'uppercase mr-4'} variant={'black'}/>}
-                    {codeSourceLink && <Button text={'See Code'} link={codeSourceLink} newTab={true} additionalClasses={'uppercase'} variant={'black'}/>}
+                    {projectLink && <Button text={getTranslationFromString('project-details.cta.project',translations)} link={projectLink} newTab={true} additionalClasses={'uppercase mr-4'} variant={'black'}/>}
+                    {codeSourceLink && <Button text={getTranslationFromString('project-details.cta.code',translations)} link={codeSourceLink} newTab={true} additionalClasses={'uppercase'} variant={'black'}/>}
                 </div>
                 {tags.length > 0 && <p className='italic'>Tags: {tags.join(', ')}</p>}
             </div>

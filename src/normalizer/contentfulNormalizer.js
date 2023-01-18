@@ -1,7 +1,8 @@
 import dayjs from 'dayjs'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+require('dayjs/locale/es')
 
-export const contentfulNormalizer = (response) => {
+export const contentfulNormalizer = (response, locale) => {
 
     return {
         ...(response.data?.aboutCollection?.items?.length && 
@@ -63,8 +64,9 @@ export const contentfulNormalizer = (response) => {
             projects: response?.data?.projectCollection?.items?.sort((a,b) => {
                 return new Date(b.creationDate) - new Date(a.creationDate);
               }).map(project => {
+                const date = dayjs(project.creationDate).locale(locale ? locale.slice(0, 2) : 'en').format('MMMM YYYY')
                 return {
-                    creationDate: dayjs(project.creationDate).format('MMMM YYYY'),
+                    creationDate: date.slice(0, 1).toUpperCase() + date.slice(1),
                     codeSourceLink: project.codeSourceLink,
                     slug: project.slug,
                     title: project.title,
@@ -103,6 +105,14 @@ export const contentfulNormalizer = (response) => {
             }).sort((a, b) => {
                 return a.title.localeCompare(b.title)
             })
-        }})
+        }}),
+        ...(response.data?.translationCollection?.items?.length && {translations:
+            response.data.translationCollection.items.map(translation => {
+                return {
+                    string: translation.string,
+                    translation: translation.translation
+                }
+            })
+        })
     }
 }

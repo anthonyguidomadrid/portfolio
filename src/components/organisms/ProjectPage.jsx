@@ -4,7 +4,7 @@ import MoonLoader from "react-spinners/ClipLoader"
 import { Header } from '../molecules/Header'
 import { ProjectDetail } from '../molecules/ProjectDetail'
 
-export const ProjectPage = ({projectsContent, setLocale}) => {
+export const ProjectPage = ({projectsContent, setLocale, translations}) => {
     const { id, locale } = useParams()
     const [ selectedProject, setSelectedProject ] = useState(undefined)
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ export const ProjectPage = ({projectsContent, setLocale}) => {
     return (
         <>
             <Header headerContent={selectedProject} isFullSize={false} displayBackBtn={true} locale={locale}/>
-            <ProjectDetail projectContent={selectedProject}/>
+            <ProjectDetail projectContent={selectedProject} translations={translations}/>
         </>
     )
 }

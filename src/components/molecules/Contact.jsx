@@ -4,8 +4,9 @@ import { ReactComponent as Phone } from '../../assets/Phone.svg'
 import { ReactComponent as Email } from '../../assets/Email.svg'
 import classNames from 'classnames'
 import emailjs from 'emailjs-com'
+import { getTranslationFromString } from '../../helpers/getTranslationFromString'
 
-export const Contact = ({contactContent}) => {
+export const Contact = ({contactContent, translations}) => {
     const { title, subtitle, description, email, phone } = contactContent
     const id = removeEmptySpaceAndHighCase(title)
     const [formData, setFormData] = useState({
@@ -66,7 +67,7 @@ export const Contact = ({contactContent}) => {
                     <label>
                         <input
                         type="text" 
-                        placeholder='Name'
+                        placeholder={getTranslationFromString('home.contact.form.name', translations)}
                         className='w-full border-b border-gray-500 h-10'
                         value={formData.name}
                         onChange={e => setFormData({...formData, name: e?.target?.value})}
@@ -75,7 +76,7 @@ export const Contact = ({contactContent}) => {
                     <label>
                         <input
                         type="email" 
-                        placeholder='Email'
+                        placeholder={getTranslationFromString('home.contact.form.email', translations)}
                         className='w-full border-b border-gray-500 h-10'
                         value={formData.email}
                         onChange={e => setFormData({...formData, email: e?.target?.value})}
@@ -85,7 +86,7 @@ export const Contact = ({contactContent}) => {
                     <label>
                         <input
                         type="text" 
-                        placeholder='Subject'
+                        placeholder={getTranslationFromString('home.contact.form.subject', translations)}
                         className='w-full border-b border-gray-500 h-10'
                         value={formData.subject}
                         onChange={e => setFormData({...formData, subject: e?.target?.value})}
@@ -95,7 +96,7 @@ export const Contact = ({contactContent}) => {
                     <label>
                         <textarea
                         type="text" 
-                        placeholder='Message'
+                        placeholder={getTranslationFromString('home.contact.form.message', translations)}
                         className='w-full border-b border-gray-500 align-top h-36 pt-2'
                         value={formData.message}
                         onChange={e => setFormData({...formData, message: e?.target?.value})}
@@ -104,6 +105,7 @@ export const Contact = ({contactContent}) => {
                     </label>
                     <input 
                         type="submit" 
+                        value={getTranslationFromString('home.contact.form.submit', translations)}
                         className={classNames('px-4 py-2 leading-none uppercase my-5 border', {'text-gray-700 border-gray-700 hover:bg-gray-800 hover:text-white' : isFormFullyFilled}, {'text-gray-400 border-gray-400' : !isFormFullyFilled || isFormLoading})}
                         disabled={!isFormFullyFilled || isFormLoading}
                     />

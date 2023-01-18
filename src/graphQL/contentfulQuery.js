@@ -120,5 +120,11 @@ export const graphQlQuery = (locale) => {
       technologies
     }
   }
+  translationCollection(locale: "${locale}") {
+    items {
+      string
+      translation
+    }
+  }
 }
 `}

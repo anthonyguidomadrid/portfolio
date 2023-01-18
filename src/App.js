@@ -24,7 +24,7 @@ const App = () => {
       })
       .then(async (response) => {
         const data = await response.json()
-        setPageContent(contentfulNormalizer(data))
+        setPageContent(contentfulNormalizer(data, locale))
       })
       .catch(error => console.log('There was an error:', error))
   }, [locale])
