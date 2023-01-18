@@ -1,6 +1,7 @@
-export const graphQlQuery = `
+export const graphQlQuery = (locale) => {
+  return `
 {
-  aboutCollection(limit: 1) {
+  aboutCollection(limit: 1, locale: "${locale}") {
     items {
       title
       subtitle
@@ -32,7 +33,7 @@ export const graphQlQuery = `
       }
     }
   } 
-  contactCollection(limit: 1) {
+  contactCollection(limit: 1, locale: "${locale}") {
     items {
       title
       subtitle
@@ -43,7 +44,7 @@ export const graphQlQuery = `
       phone
     }
   }
-  headerCollection(limit: 2) {
+  headerCollection(limit: 2, locale: "${locale}") {
     items {
       title
       subtitle
@@ -56,13 +57,13 @@ export const graphQlQuery = `
       type
     }
   }
-  menuCollection(limit: 1) {
+  menuCollection(limit: 1, locale: "${locale}") {
     items {
       menuItems
       cta
     }
   }
-  projectCollection {
+  projectCollection(locale: "${locale}") {
     items {
       creationDate
       slug
@@ -86,13 +87,13 @@ export const graphQlQuery = `
       tags
     }
   }
-  projectHeaderCollection(limit: 1) {
+  projectHeaderCollection(limit: 1, locale: "${locale}") {
     items {
       title
       subtitle
     }
   }
-  seoCollection(limit: 1) {
+  seoCollection(limit: 1, locale: "${locale}") {
     items {
       title
       description
@@ -107,17 +108,17 @@ export const graphQlQuery = `
       }
     }
   }
-  stackCollection(limit: 1) {
+  stackCollection(limit: 1, locale: "${locale}") {
     items {
       title
       subtitle
     }
   }
-  stackTechCollection {
+  stackTechCollection(locale: "${locale}") {
     items {
       title
       technologies
     }
   }
 }
-`
+`}

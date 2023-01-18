@@ -5,10 +5,13 @@ import { graphQlQuery } from './graphQL/contentfulQuery'
 import { Seo } from './components/atoms/Seo'
 import { AppRoutes } from './routes/AppRoutes'
 import ReactGA from 'react-ga'
+import { locales } from './config/locales'
+import { capitalizeCountryFromLocale } from './helpers/transformLocale'
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID)
 
 const App = () => {
-  const [pageContent, setPageContent] = useState(null)
+  const [pageContent, setPageContent] = useState(undefined)
+  const [locale, setLocale] = useState(undefined)
 
   const fetchContent = useCallback(async () => {
     fetch(`https://graphql.contentful.com/content/v1/spaces/${process.env.REACT_APP_CONTENTFUL_SPACE_ID}`, {
@@ -17,18 +20,24 @@ const App = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN}`,
         },
-        body: JSON.stringify({ query: graphQlQuery }),
+        body: JSON.stringify({ query: graphQlQuery(capitalizeCountryFromLocale(locale)) }),
       })
       .then(async (response) => {
         const data = await response.json()
         setPageContent(contentfulNormalizer(data))
       })
       .catch(error => console.log('There was an error:', error))
-  }, [])
+  }, [locale])
 
   useEffect(() => {
     fetchContent()
   }, [fetchContent])
+
+  useEffect(() => {
+    if (locale && !locales.includes(locale)) {
+      window.location.href = '/404'
+    }
+  }, [locale])
 
   useEffect(() => {
     ReactGA.pageview(window?.location?.pathname + window?.location?.search);
@@ -47,7 +56,7 @@ const App = () => {
   return (
     <>
       <Seo seoPageContent={pageContent?.seo}/>
-      <AppRoutes pageContent={pageContent}/>
+      <AppRoutes pageContent={pageContent} setLocale={setLocale} locale={locale}/>
     </>
   )
 }

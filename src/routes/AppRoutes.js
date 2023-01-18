@@ -6,18 +6,20 @@ import { Navigation } from '../components/molecules/Navigation'
 import { Footer } from '../components/molecules/Footer'
 
 
-export const AppRoutes = ({pageContent}) => {
+export const AppRoutes = ({pageContent, setLocale, locale}) => {
     const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []    
     return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta}/>
+      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta} locale={locale}/>
       <Routes>
-          <Route exact path="/" element=<Home pageContent={pageContent}/>/>
-          <Route exact path="/projects/:id" element=<ProjectPage projectsContent={pageContent?.project?.projects} /> />
-          <Route path='/404' element={<NotFound headerContent={pageContent?.headers}/>} />
+          <Route exact path="/" element=<Home pageContent={pageContent} setLocale={setLocale} locale={locale}/>/>
+          <Route exact path="/:locale" element=<Home pageContent={pageContent} setLocale={setLocale} locale={locale}/>/>
+          <Route exact path="/projects/:id" element=<ProjectPage projectsContent={pageContent?.project?.projects} setLocale={setLocale}/> />
+          <Route exact path="/:locale/projects/:id" element=<ProjectPage projectsContent={pageContent?.project?.projects} setLocale={setLocale}/> />
+          <Route path='/404' element={<NotFound headerContent={pageContent?.headers} setLocale={setLocale}/>} />
           <Route path='*' element={<Navigate replace to='/404'/>} />
       </Routes>
-      <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia}/>
+      <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia} locale={locale}/>
     </BrowserRouter>
     )
 }

@@ -1,16 +1,16 @@
 import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
 import { HashLink as Link } from 'react-router-hash-link'
 
-export const Footer = ({logo, footerItems, socialMedia}) => {
+export const Footer = ({logo, footerItems, socialMedia, locale}) => {
     return (
         <div className="bg-slate-900 text-white px-10 md:px-24">
             <div className="py-10">
-                <Link smooth to={'/#top'}><img src={logo?.url} alt={logo?.description} className="mx-auto h-12 w-12"></img></Link>
+                <Link smooth to={locale ? `${locale}/#top` : "/#top"}><img src={logo?.url} alt={logo?.description} className="mx-auto h-12 w-12"></img></Link>
             </div>
             <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
             {footerItems?.length && footerItems.map((item, idx) => {
                 const id = removeEmptySpaceAndHighCase(item)
-                return <Link key={idx} smooth to={`/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</Link>
+                return <Link key={idx} smooth to={locale ? `${locale}/#${id}` : `/#${id}`} className="uppercase px-5 text-xs sm:text-sm md:text-base">{item}</Link>
             })}
             </div>
             {socialMedia?.length && <div className="flex justify-center py-5">{socialMedia.map((elm, idx) => {
