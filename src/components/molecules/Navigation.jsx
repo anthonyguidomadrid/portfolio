@@ -42,11 +42,9 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                 <div className="text-sm md:flex-grow">
                 {menuItems?.filter(item => !item.isCta).map((item, idx) => {
                     const {name, link, isProject} = item
-                    console.log('isHomePage', isHomePage)
                     return (isHomePage ? 
                     isProject ?
                     <>
-                        {console.log('select project item', item)}
                         <Link 
                             key={idx}
                             activeStyle={{color: '#ffffff'}} 
@@ -76,7 +74,19 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                         >
                         {name}
                     </Link>
-                    : 
+                    : isProject ?
+                    <>
+                    <HashLink
+                        key={idx}
+                        className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white" 
+                        smooth to={locale ? `${locale}/#${link}` : `/#${link}`} 
+                        onClick={() => setMenuOpen(false)}
+                        >
+                        {name}
+                    </HashLink>
+                    <button onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}><Chevron className={classNames('mr-4 ml-2 h-2 w-2 text-slate-200/75', {'rotate-270' : !isSubMenuOpen})}/></button>
+                    </>
+                    :
                     <HashLink
                     key={idx}
                     className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white mr-4" 
@@ -115,14 +125,15 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
             </div>
             {isSubMenuOpen && 
             <div className='absolute top-20 left-28 text-sm text-slate-200/75 bg-slate-900 bg-opacity-80 p-5 flex flex-col'>
-                {console.log('projectsContent', projectsContent)}
                 {projectsContent.length > 0 && projectsContent.map((project, idx) => {
                     const {title, slug} = project
+                    const isCurrent = location.pathname?.includes(slug)
+
                     return (
                         <HashLink
                             key={idx}
                             smooth to={locale ? `/${locale}/projects/${slug}#top` : `/projects/${slug}#top`}
-                            className='hover:text-white mb-2'
+                            className={isCurrent ? 'text-white mb-2' : 'hover:text-white mb-2'}
                             onClick={() => {
                                 setMenuOpen(false)
                                 setIsSubMenuOpen(false)
