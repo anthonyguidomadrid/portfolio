@@ -1,11 +1,9 @@
 import '@splidejs/react-splide/css';
 import { Splide, SplideSlide } from '@splidejs/react-splide'
-import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
 import { HashLink as Link } from 'react-router-hash-link'
 
 export const ProjectSlider = ({projectContent}) => {
-    const {title, subtitle} = projectContent
-    const id = removeEmptySpaceAndHighCase(title)
+    const {title, subtitle, id} = projectContent
     return (
         <section>
             {title && <div id={id} className='text-center text-slate-900 my-14 px-10 md:px-24'>

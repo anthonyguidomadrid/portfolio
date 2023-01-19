@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../atoms/Button'
-import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
 
-export const About = ({aboutContent, locale, translations}) => {
-    const { title, subtitle, image, description, cv } = aboutContent
-    const id = removeEmptySpaceAndHighCase(title)
+export const About = ({aboutContent, locale}) => {
+    const { title, subtitle, image, description, cv, id } = aboutContent
     const [index, setIndex] = useState(0)
 
     useEffect(() => {

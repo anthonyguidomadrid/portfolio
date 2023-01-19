@@ -7,6 +7,7 @@ export const contentfulNormalizer = (response, locale) => {
     return {
         ...(response.data?.aboutCollection?.items?.length && 
             {about: {
+            id: response?.data?.aboutCollection?.items?.[0]?.id,
             title: response?.data?.aboutCollection?.items?.[0]?.title,
             subtitle: response?.data?.aboutCollection?.items?.[0]?.subtitle,
             description: documentToHtmlString(response?.data?.aboutCollection?.items?.[0]?.description?.json),
@@ -33,6 +34,7 @@ export const contentfulNormalizer = (response, locale) => {
             })
         },
         ...(response.data?.contactCollection?.items?.length && {contact: {
+            id: response?.data?.contactCollection?.items?.[0]?.id,
             title: response?.data?.contactCollection?.items?.[0]?.title,
             subtitle: response?.data?.contactCollection?.items?.[0]?.subtitle,
             description: documentToHtmlString(response?.data?.contactCollection?.items?.[0]?.description?.json),
@@ -54,11 +56,20 @@ export const contentfulNormalizer = (response, locale) => {
                 }
             })
         }),
-        menu: {
-            menuItems: response?.data?.menuCollection?.items?.[0]?.menuItems,
-            cta: response?.data?.menuCollection?.items?.[0]?.cta
-        },
+        ...(response.data?.menuItemCollection?.items?.length && {
+            menuItems: response.data.menuItemCollection.items.sort((a, b) => {
+                return a.index - b.index
+            }).map(item => {
+                return {
+                    name: item.name,
+                    link: item.link,
+                    isProject: item.isProject,
+                    isCta: item.cta
+                }
+            })
+        }),
         ...(response.data?.aboutCollection?.items?.length && {project: {
+            id: response?.data?.projectHeaderCollection?.items?.[0].id,
             title: response?.data?.projectHeaderCollection?.items?.[0].title,
             subtitle: response?.data?.projectHeaderCollection?.items?.[0].subtitle,
             projects: response?.data?.projectCollection?.items?.sort((a,b) => {
@@ -95,6 +106,7 @@ export const contentfulNormalizer = (response, locale) => {
             thumbnail: response?.data?.seoCollection?.items?.[0]?.thumbnail?.url
         },
         ...(response?.data?.stackTechCollection?.items?.length > 0 && {stack: {
+            id: response?.data?.stackCollection?.items?.[0]?.id,
             title: response?.data?.stackCollection?.items?.[0]?.title,
             subtitle: response?.data?.stackCollection?.items?.[0]?.subtitle,
             technologies: response?.data?.stackTechCollection?.items?.map(item => {

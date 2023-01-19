@@ -1,3 +1,3 @@
-export const locales = [
-    'es-es'
-]
+export const locales = {
+    spain: 'es-es'
+}

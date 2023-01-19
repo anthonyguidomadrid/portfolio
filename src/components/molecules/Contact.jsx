@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback } from 'react'
-import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
 import { ReactComponent as Phone } from '../../assets/Phone.svg'
 import { ReactComponent as Email } from '../../assets/Email.svg'
 import classNames from 'classnames'
@@ -7,8 +6,7 @@ import emailjs from 'emailjs-com'
 import { getTranslationFromString } from '../../helpers/getTranslationFromString'
 
 export const Contact = ({contactContent, translations}) => {
-    const { title, subtitle, description, email, phone } = contactContent
-    const id = removeEmptySpaceAndHighCase(title)
+    const { id, title, subtitle, description, email, phone } = contactContent
     const [formData, setFormData] = useState({
             name: '',
             email: '',

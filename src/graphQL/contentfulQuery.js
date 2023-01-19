@@ -3,6 +3,7 @@ export const graphQlQuery = (locale) => {
 {
   aboutCollection(limit: 1, locale: "${locale}") {
     items {
+      id
       title
       subtitle
       description {
@@ -35,6 +36,7 @@ export const graphQlQuery = (locale) => {
   } 
   contactCollection(limit: 1, locale: "${locale}") {
     items {
+      id
       title
       subtitle
       description {
@@ -57,9 +59,12 @@ export const graphQlQuery = (locale) => {
       type
     }
   }
-  menuCollection(limit: 1, locale: "${locale}") {
+  menuItemCollection(limit: 10, locale: "${locale}") {
     items {
-      menuItems
+      name
+      link
+      index
+      isProject
       cta
     }
   }
@@ -89,6 +94,7 @@ export const graphQlQuery = (locale) => {
   }
   projectHeaderCollection(limit: 1, locale: "${locale}") {
     items {
+      id
       title
       subtitle
     }
@@ -110,6 +116,7 @@ export const graphQlQuery = (locale) => {
   }
   stackCollection(limit: 1, locale: "${locale}") {
     items {
+      id
       title
       subtitle
     }

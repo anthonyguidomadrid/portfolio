@@ -6,8 +6,7 @@ import { ReactComponent as Chevron } from '../../assets/Chevron.svg'
 
 
 export const Stack = ({stackContent}) => {
-    const {title, subtitle, technologies} = stackContent
-    const id = removeEmptySpaceAndHighCase(title)
+    const {id, title, subtitle, technologies} = stackContent
     const isFirstRender = useIsFirstRender()
     const [isAccordionOpen, setAccordionOpen] = useState(null)
 

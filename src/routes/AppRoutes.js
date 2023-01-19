@@ -7,10 +7,9 @@ import { Footer } from '../components/molecules/Footer'
 
 
 export const AppRoutes = ({pageContent, setLocale, locale}) => {
-    const footerItems = pageContent ? pageContent?.menu?.menuItems.concat([pageContent?.menu?.cta]) : []    
     return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menu?.menuItems} cta={pageContent?.menu?.cta} locale={locale}/>
+      <Navigation logo={pageContent?.assets?.logo} menuItems={pageContent?.menuItems} locale={locale} projectsContent={pageContent?.project?.projects}/>
       <Routes>
           <Route exact path="/" element=<Home pageContent={pageContent} setLocale={setLocale} locale={locale}/>/>
           <Route exact path="/:locale" element=<Home pageContent={pageContent} setLocale={setLocale} locale={locale}/>/>
@@ -19,7 +18,7 @@ export const AppRoutes = ({pageContent, setLocale, locale}) => {
           <Route path='/404' element={<NotFound headerContent={pageContent?.headers} setLocale={setLocale}/>} />
           <Route path='*' element={<Navigate replace to='/404'/>} />
       </Routes>
-      <Footer logo={pageContent?.assets?.logo} footerItems={footerItems} socialMedia={pageContent?.assets?.socialMedia} locale={locale}/>
+      <Footer logo={pageContent?.assets?.logo} footerItems={pageContent?.menuItems} socialMedia={pageContent?.assets?.socialMedia} locale={locale}/>
     </BrowserRouter>
     )
 }

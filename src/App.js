@@ -34,7 +34,7 @@ const App = () => {
   }, [fetchContent])
 
   useEffect(() => {
-    if (locale && !locales.includes(locale)) {
+    if (locale && !Object.keys(locales).find(key => locales[key] === locale)) {
       window.location.href = locale ? `${locale}/404` : '/404'
     }
   }, [locale])

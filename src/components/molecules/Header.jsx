@@ -4,9 +4,10 @@ import { HashLink as Link } from 'react-router-hash-link'
 
 export const Header = ({headerContent, isFullSize = true, displayBackBtn=false, locale}) => {
     const { title, subtitle, image, ctaText, ctaLink, thumbnail} = headerContent
+
     return (
         <section style={{backgroundImage: `url(${thumbnail?.url ?? image?.url ?? '../../default-banner-image.jpeg'})`,backgroundRepeat:"no-repeat",backgroundSize:"cover", backgroundAttachment: 'fixed'}} className={classNames("flex justify-center flex-col text-white px-5", {'h-screen' : isFullSize}, {'py-36' : !isFullSize})}>
-            {displayBackBtn && <Link smooth to={locale ? `/${locale}/#proyectos` : "/#projects"} title="Go back" className="flex items-center justify-center p-2 rounded-full bg-gray-500 opacity-80 mb-7 ml-10 h-9 w-9 md:h-11 md:w-11">
+            {displayBackBtn && <Link smooth to={locale ? `/${locale}/#projects` : "/#projects"} title="Go back" className="flex items-center justify-center p-2 rounded-full bg-gray-500 opacity-80 mb-7 ml-10 h-9 w-9 md:h-11 md:w-11">
                 <BackButton />
             </Link>}
             <h1 className="text-4xl md:text-6xl font-bold uppercase drop-shadow-lg text-center">{title ?? 'Hello World'}</h1>
