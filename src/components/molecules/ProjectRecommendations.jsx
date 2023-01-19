@@ -14,7 +14,7 @@ export const ProjectRecommendations = ({translations, selectedProject, projectsC
             <Splide
                 options={ {
                 perPage: isMobile ? 1 : 2,
-                height : '12rem',
+                height : '15rem',
                 rewind : true,
                 gap    : '1rem',
                 } }
@@ -25,8 +25,8 @@ export const ProjectRecommendations = ({translations, selectedProject, projectsC
                             <SplideSlide key={idx}>
                                 <Link smooth to={locale ? `/${locale}/projects/${slug}#top`: `/projects/${slug}#top`}>
                                     <div style={{backgroundImage: `url(${thumbnail?.url ?? '../../default-banner-image.jpeg'})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className="text-white px-20 h-full flex flex-col justify-center drop-shadow transition-transform duration-500 hover:opacity-95">
-                                        {title && <h4 className='text-2xl font-bold font-mono'>{title}</h4>}
-                                        {subtitle && <p className='text-sm uppercase mt-3'>{subtitle}</p>}
+                                        {title && <h4 className='text-2xl md:text-3xl font-bold font-mono'>{title}</h4>}
+                                        {subtitle && <p className='text-sm md:text-base uppercase mt-3'>{subtitle}</p>}
                                     </div>
                                 </Link>
                             </SplideSlide>
