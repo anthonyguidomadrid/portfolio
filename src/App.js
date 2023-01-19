@@ -35,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     if (locale && !locales.includes(locale)) {
-      window.location.href = '/404'
+      window.location.href = locale ? `${locale}/404` : '/404'
     }
   }, [locale])
 

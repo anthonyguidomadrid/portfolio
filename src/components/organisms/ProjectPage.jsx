@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import MoonLoader from "react-spinners/ClipLoader"
 import { Header } from '../molecules/Header'
 import { ProjectDetail } from '../molecules/ProjectDetail'
+import { ProjectRecommendations } from '../molecules/ProjectRecommendations'
 
 export const ProjectPage = ({projectsContent, setLocale, translations}) => {
     const { id, locale } = useParams()
@@ -39,6 +40,7 @@ export const ProjectPage = ({projectsContent, setLocale, translations}) => {
         <>
             <Header headerContent={selectedProject} isFullSize={false} displayBackBtn={true} locale={locale}/>
             <ProjectDetail projectContent={selectedProject} translations={translations}/>
+            <ProjectRecommendations translations={translations} selectedProject={selectedProject} projectsContent={projectsContent} locale={locale}/>
         </>
     )
 }
