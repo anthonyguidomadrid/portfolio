@@ -7,8 +7,9 @@ import { HashLink } from 'react-router-hash-link'
 import { Link } from "react-scroll"
 import { useLocation } from 'react-router-dom'
 import { locales } from '../../config/locales'
-import { ReactComponent as Chevron } from '../../assets/Chevron.svg'
 import { useBreakpoint } from '../../customHooks/useBreakpoint'
+import { MobileSubMenu } from '../atoms/MobileSubmenu'
+import { ChevronButton } from '../atoms/ChevronButton'
 
 export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
     const [isMenuOpen, setMenuOpen] = useState(false)
@@ -29,36 +30,12 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
         }
     }
 
-    const ChevronBtn = () => {return <button onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}><Chevron className={classNames('mr-4 ml-2 h-2 w-2 text-slate-200/75 mb-1.5 md:mb-0', {'rotate-270' : !isSubMenuOpen})}/></button>}
-
-    const MobileSubMenu = () => {
-        return (
-            <div className={classNames('text-xs text-slate-200/75 flex flex-col opacity-0 h-0', {'h-max opacity-100' : isSubMenuOpen})}>
-            {projectsContent.length > 0 && projectsContent.map((project, idx) => {
-                const {title, slug} = project
-                const isCurrent = location.pathname?.includes(slug)
-                return (<HashLink
-                key={idx}
-                smooth to={locale ? `/${locale}/projects/${slug}#top` : `/projects/${slug}#top`}
-                className={isCurrent ? 'text-white mt-2' : 'hover:text-white mt-2'}
-                onClick={() => {
-                    setMenuOpen(false)
-                    setIsSubMenuOpen(false)
-                    }}
-            >
-            {title}
-            </HashLink>)
-            })}
-            </div>
-        )
-    }
-
     window.onscroll = () => scrollFunction()
 
     return (
-        <nav className={classNames("flex items-center justify-between flex-wrap p-6 fixed top-0 w-full z-50", {'bg-slate-900 bg-opacity-80': ispageScrolled || isMenuOpen})}>
+        <nav className={classNames("flex items-center justify-between flex-wrap p-6 fixed top-0 w-full z-50 transition-all duration-500", {'bg-slate-900 bg-opacity-80': ispageScrolled || isMenuOpen || isSubMenuOpen})}>
             <div className="flex items-center flex-shrink-0 text-white mr-6">
-                <HashLink smooth to={locale ? `${locale}/#top` : "/#top"}><img src={logo?.url} alt={logo?.description} className="h-7 w-7"></img></HashLink>
+                <HashLink smooth to={locale ? `${locale}/#top` : "/#top"} onClick={() => setMenuOpen(false)}><img src={logo?.url} alt={logo?.description} className="h-7 w-7"></img></HashLink>
             </div>
             <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border text-white border-white-400 hover:text-white hover:border-white" onClick={() => setMenuOpen(!isMenuOpen)}>
@@ -70,13 +47,12 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                 {menuItems?.filter(item => !item.isCta).map((item, idx) => {
                     const {name, link, isProject} = item
                     return (isHomePage ? 
-                    isProject ?
                     <>
                         <div className='flex md:inline items-end'>
                             <Link 
                                 key={idx}
                                 activeStyle={{color: '#ffffff'}} 
-                                className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white" 
+                                className={classNames("block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white", {'mr-4' : !isProject})} 
                                 to={link} 
                                 spy={true} 
                                 smooth={true}
@@ -86,48 +62,26 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                                 >
                                 {name}
                             </Link>
-                            <ChevronBtn />
+                            {isProject && <ChevronButton isSubMenuOpen={isSubMenuOpen} setIsSubMenuOpen={setIsSubMenuOpen}/>}
                         </div>
-                        {isMobile && <MobileSubMenu />}
+                        {isMobile && isProject && <MobileSubMenu projectsContent={projectsContent} locale={locale} isSubMenuOpen={isSubMenuOpen} setMenuOpen={setMenuOpen} setIsSubMenuOpen={setIsSubMenuOpen}/>}
                     </>
                     :
-                    <Link 
-                        key={idx}
-                        activeStyle={{color: '#ffffff'}} 
-                        className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white mr-4" 
-                        to={link} 
-                        spy={true} 
-                        smooth={true}
-                        hashSpy={true}
-                        duration={500}
-                        onClick={() => setMenuOpen(false)}
-                        >
-                        {name}
-                    </Link>
-                    : isProject ?
                     <>
                         <div className='flex md:inline items-end'>
                             <HashLink
                                 key={idx}
-                                className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white" 
+                                className={classNames("block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white", {'mr-4' : !isProject})} 
                                 smooth to={locale ? `${locale}/#${link}` : `/#${link}`} 
                                 onClick={() => setMenuOpen(false)}
                                 >
                                 {name}
                             </HashLink>
-                            <ChevronBtn />
+                            {isProject && <ChevronButton isSubMenuOpen={isSubMenuOpen} setIsSubMenuOpen={setIsSubMenuOpen}/>} 
                         </div>
-                        {isMobile && <MobileSubMenu />}
+                        {isMobile && isProject && <MobileSubMenu projectsContent={projectsContent} locale={locale} isSubMenuOpen={isSubMenuOpen} setMenuOpen={setMenuOpen} setIsSubMenuOpen={setIsSubMenuOpen}/>}
                     </>
-                    :
-                    <HashLink
-                    key={idx}
-                    className="block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white mr-4" 
-                    smooth to={locale ? `${locale}/#${link}` : `/#${link}`} 
-                    onClick={() => setMenuOpen(false)}
-                    >
-                    {name}
-                    </HashLink>)
+                    )
                 })}
                 </div>
                 <div>
@@ -172,7 +126,7 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                                 setIsSubMenuOpen(false)
                                 }}
                         >
-                        {title}
+                            {title}
                         </HashLink>
                     )
                 })}
