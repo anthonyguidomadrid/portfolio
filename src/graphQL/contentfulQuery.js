@@ -134,4 +134,5 @@ export const graphQlQuery = (locale) => {
     }
   }
 }
-`}
+`;
+};

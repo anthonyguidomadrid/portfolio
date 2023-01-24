@@ -3,11 +3,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Contentful was used as a CMS for all the content displayed.
 
 ## Previews
+
 ![screenshot1](https://user-images.githubusercontent.com/80059432/211064460-9f57ac9f-f6f7-4d72-a238-6468af1102fc.jpg)
 
 ![screenshot2](https://user-images.githubusercontent.com/80059432/211064470-9d770925-438e-4cf3-bed2-d283f1936ea8.jpg)
 
 ## Variables
+
 `REACT_APP_CONTENTFUL_SPACE_ID=` [https://www.contentful.com/help/find-space-id/](https://www.contentful.com/help/find-space-id/)\
 `REACT_APP_CONTENTFUL_ACCESS_TOKEN=` [https://www.contentful.com/developers/docs/concepts/apis/](https://www.contentful.com/developers/docs/concepts/apis/)\
 `REACT_APP_EMAILJS_SERVICE_ID=`\
@@ -35,14 +37,15 @@ It correctly bundles React in production mode and optimizes the build for the be
 ## Libraries
 
 Here is the list of the libraries installed for this project:
-* `classnames`
-* `dayjs`
-* `emailjs-com`
-* `react-router-dom`
-* `react-router-hash-link`
-* `react-scripts`
-* `react-spinners`
-* `tailwind`
+
+- `classnames`
+- `dayjs`
+- `emailjs-com`
+- `react-router-dom`
+- `react-router-hash-link`
+- `react-scripts`
+- `react-spinners`
+- `tailwind`
 
 ## Contentful Content Models
 
@@ -79,7 +82,7 @@ Here is the list of the libraries installed for this project:
         }
       }
     }
-  } 
+  }
   contactCollection(limit: 1) {
     items {
       title: string
