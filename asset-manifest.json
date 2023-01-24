@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.64cf19d1.css",
-    "main.js": "/static/js/main.b3e3a4ec.js",
+    "main.js": "/static/js/main.1632ff56.js",
     "static/js/787.1ed0c42c.chunk.js": "/static/js/787.1ed0c42c.chunk.js",
     "static/media/EsFlag.svg": "/static/media/EsFlag.275ea742f57b0dd7d07aa2f44a14f156.svg",
     "static/media/Email.svg": "/static/media/Email.7f04ddae84cb601de713f902f5927f5b.svg",
@@ -12,11 +12,11 @@
     "static/media/EnFlag.svg": "/static/media/EnFlag.ab156fc0768bfde65e9aeef4630b3628.svg",
     "static/media/BackButton.svg": "/static/media/BackButton.de93ee9b217c77438be671110e547d18.svg",
     "main.64cf19d1.css.map": "/static/css/main.64cf19d1.css.map",
-    "main.b3e3a4ec.js.map": "/static/js/main.b3e3a4ec.js.map",
+    "main.1632ff56.js.map": "/static/js/main.1632ff56.js.map",
     "787.1ed0c42c.chunk.js.map": "/static/js/787.1ed0c42c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.64cf19d1.css",
-    "static/js/main.b3e3a4ec.js"
+    "static/js/main.1632ff56.js"
   ]
 }
