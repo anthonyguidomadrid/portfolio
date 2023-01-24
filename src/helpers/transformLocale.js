@@ -1,6 +1,6 @@
-export const capitalizeCountryFromLocale = (locale) => {
+export const capitalizeCountryFromLocale = locale => {
   if (!locale) {
-    return "";
+    return ''
   }
-  return locale.slice(0, 3) + locale.slice(-2).toUpperCase();
-};
+  return locale.slice(0, 3) + locale.slice(-2).toUpperCase()
+}

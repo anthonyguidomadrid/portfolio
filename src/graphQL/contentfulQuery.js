@@ -1,5 +1,4 @@
-export const graphQlQuery = (locale) => {
-  return `
+export const graphQlQuery = locale => `
 {
   aboutCollection(limit: 1, locale: "${locale}") {
     items {
@@ -134,5 +133,4 @@ export const graphQlQuery = (locale) => {
     }
   }
 }
-`;
-};
+`

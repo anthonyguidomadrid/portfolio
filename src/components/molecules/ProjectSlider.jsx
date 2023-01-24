@@ -17,7 +17,7 @@ export const ProjectSlider = ({ projectContent }) => {
           )}
         </div>
       )}
-      <Splide
+    <Splide
         options={{
           type: "fade",
           rewind: true,

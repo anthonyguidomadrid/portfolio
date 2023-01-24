@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
-import { Header } from "../molecules/Header";
-import { About } from "../molecules/About";
-import { ProjectSlider } from "../molecules/ProjectSlider";
-import { Stack } from "../molecules/Stack";
-import { Contact } from "../molecules/Contact";
-import { useEffect } from "react";
+import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Header } from '../molecules/Header';
+import { About } from '../molecules/About';
+import { ProjectSlider } from '../molecules/ProjectSlider';
+import { Stack } from '../molecules/Stack';
+import { Contact } from '../molecules/Contact';
 
-export const Home = ({ pageContent, setLocale }) => {
+export function Home({ pageContent, setLocale }) {
   const { locale } = useParams();
   useEffect(() => {
     setLocale(locale);
@@ -16,7 +16,7 @@ export const Home = ({ pageContent, setLocale }) => {
     <>
       <Header
         headerContent={pageContent?.headers.find(
-          (header) => header.type === "home"
+          (header) => header.type === 'home'
         )}
         locale={locale}
       />
@@ -35,4 +35,4 @@ export const Home = ({ pageContent, setLocale }) => {
       )}
     </>
   );
-};
+}

@@ -1,12 +1,12 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { Home } from "../components/organisms/Home";
-import { ProjectPage } from "../components/organisms/ProjectPage";
-import { NotFound } from "../components/organisms/NotFound";
-import { Navigation } from "../components/molecules/Navigation";
-import { Footer } from "../components/molecules/Footer";
-import { Seo } from "../components/atoms/Seo";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Home } from '../components/organisms/Home'
+import { ProjectPage } from '../components/organisms/ProjectPage'
+import { NotFound } from '../components/organisms/NotFound'
+import { Navigation } from '../components/molecules/Navigation'
+import { Footer } from '../components/molecules/Footer'
+import { Seo } from '../components/atoms/Seo'
 
-export const AppRoutes = ({ pageContent, setLocale, locale }) => {
+export function AppRoutes({ pageContent, setLocale, locale }) {
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Seo seoPageContent={pageContent?.seo} />
@@ -73,5 +73,5 @@ export const AppRoutes = ({ pageContent, setLocale, locale }) => {
         locale={locale}
       />
     </BrowserRouter>
-  );
-};
+  )
+}

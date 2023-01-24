@@ -1,6 +1,6 @@
-export const removeEmptySpaceAndHighCase = (string) => {
+export const removeEmptySpaceAndHighCase = string => {
   if (!string) {
-    return "";
+    return ''
   }
-  return string.toLowerCase().replace(/\s/g, "");
-};
+  return string.toLowerCase().replace(/\s/g, '')
+}
