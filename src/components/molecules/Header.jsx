@@ -3,10 +3,11 @@ import { ReactComponent as BackButton } from '../../assets/BackButton.svg'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useBreakpoint } from '../../customHooks/useBreakpoint'
 
-export const Header = ({headerContent, isFullSize = true, displayBackBtn=false, locale}) => {
+export const Header = ({headerContent, isFullSize = true, displayBackBtn=false, locale, menuItems}) => {
     const { title, subtitle, image, ctaText, ctaLink, thumbnail} = headerContent
     const point = useBreakpoint()
     const isMobile = point === 'sm' || point === 'md'
+    const projectLink = menuItems && menuItems.find(project => project.isProject)?.link
 
     return (
         <div style={{
@@ -19,7 +20,7 @@ export const Header = ({headerContent, isFullSize = true, displayBackBtn=false, 
             backgroundPosition: 'center'
             }} 
             className={classNames("flex justify-center flex-col text-white px-5", {'h-screen' : isFullSize}, {'py-36' : !isFullSize})}>
-            {displayBackBtn && <Link smooth to={locale ? `/${locale}/#projects` : "/#projects"} title="Go back" className="flex items-center justify-center p-2 rounded-full bg-gray-500 opacity-80 mb-7 ml-10 h-9 w-9 md:h-11 md:w-11">
+            {displayBackBtn && <Link smooth to={locale ? `/${locale}/#${projectLink}` : `/#${projectLink}`} title="Go back" className="flex items-center justify-center p-2 rounded-full bg-gray-500 opacity-80 mb-7 ml-10 h-9 w-9 md:h-11 md:w-11">
                 <BackButton />
             </Link>}
             <h1 className="text-4xl md:text-6xl font-bold uppercase drop-shadow-lg text-center">{title ?? 'Hello World'}</h1>

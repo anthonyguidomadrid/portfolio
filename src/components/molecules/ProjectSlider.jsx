@@ -6,8 +6,8 @@ export const ProjectSlider = ({projectContent}) => {
     const {title, subtitle, id} = projectContent
 
     return (
-        <section>
-            {title && <div id={id} className='text-center text-slate-900 my-14 px-10 md:px-24'>
+        <section id={id}>
+            {title && <div className='text-center text-slate-900 my-14 px-10 md:px-24'>
                 <h2 className='uppercase font-bold text-xl'>{title}</h2>
                 {subtitle && <p className='font-mono text-4xl text-gray-500 my-5 lg:pb-5 mt-7'>{subtitle}</p>}
             </div>}

@@ -46,7 +46,8 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                 <div className="text-sm md:flex-grow">
                 {menuItems?.filter(item => !item.isCta).map((item, idx) => {
                     const {name, link, isProject} = item
-                    return (isHomePage ? 
+                    return (
+                        isHomePage ? 
                     <>
                         <div className='flex md:inline items-end'>
                             <Link 
@@ -87,6 +88,7 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                 <div>
                 {ctaMenuItem ? isHomePage ?
                 <Link 
+                    key='cta'
                     activeStyle={{borderColor: '#ffffff'}}
                     to={`${ctaMenuItem.link}`} 
                     className="inline-block text-sm px-4 py-2 leading-none border text-slate-200 border-slate-500 hover:border-transparent hover:text-black hover:bg-white my-4 md:my-0" 
@@ -110,13 +112,13 @@ export const Navigation = ({logo, menuItems,locale, projectsContent}) => {
                     <HashLink smooth to={locale ? currentPath : `/${locales.spain}${currentPath}`} onClick={() => setMenuOpen(false)}>{locale ? <EnglishFlag/> : <SpanishFlag/>}</HashLink>
                 </div>
             </div>
-            {!isMobile  && 
-            <div className={classNames('absolute top-20 left-28 text-sm text-slate-200/75 bg-slate-900 bg-opacity-80 p-5 flex flex-col opacity-0 transition-all duration-500 max-h-0', {'opacity-100 max-h-96' : isSubMenuOpen})}>
+            {!isMobile &&
+            <div className={classNames('absolute top-20 left-28 text-sm text-slate-200/75 bg-slate-900 bg-opacity-80 flex flex-col opacity-0 ease-in duration-200 max-h-0', {'opacity-100 max-h-96 p-5' : isSubMenuOpen})}>
                 {projectsContent.length > 0 && projectsContent.map((project, idx) => {
                     const {title, slug} = project
                     const isCurrent = location.pathname?.includes(slug)
 
-                    return (
+                    return !isSubMenuOpen ? null : (
                         <HashLink
                             key={idx}
                             smooth to={locale ? `/${locale}/projects/${slug}#top` : `/projects/${slug}#top`}

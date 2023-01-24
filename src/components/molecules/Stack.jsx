@@ -24,8 +24,8 @@ export const Stack = ({stackContent}) => {
     }
 
     return (
-        <section className='bg-slate-900 text-white px-10 md:px-36 lg:px-48 xl:px-80 transition-all duration-500'>
-            {title && <div id={id} className='text-center py-14'>
+        <section id={id} className='bg-slate-900 text-white px-10 md:px-36 lg:px-48 xl:px-80 transition-all duration-500'>
+            {title && <div className='text-center py-14'>
                 <h2 className='uppercase font-bold text-xl'>{title}</h2>
                 {subtitle && <p className='font-mono text-2xl text-gray-100 md:my-5 md:mx-24 mt-7'>{subtitle}</p>}
             </div>}

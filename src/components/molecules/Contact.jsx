@@ -44,7 +44,7 @@ export const Contact = ({contactContent, translations}) => {
 
     return (
         <section className="md:flex" id={id}>
-            <div className="md:w-1/2 p-10 flex justify-center flex-col order-2 lg:mx-24">
+            <div className="md:w-1/2 pt-10 px-10 md:pb-10 flex justify-center flex-col order-2 lg:mx-24">
                 <h2 className="uppercase font-bold text-xl">{title}</h2>
                 <p className='font-mono text-3xl text-gray-500 my-5 lg:pb-5'>{subtitle}</p>
                 <div className='pb-10' dangerouslySetInnerHTML={{ __html: description }} />
@@ -58,10 +58,10 @@ export const Contact = ({contactContent, translations}) => {
                 </div>}
             </div>
             <div className="md:w-1/2 order-1">
-                <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100' : isFormSuccessfullySubmitted}, {'bg-rose-100' : isFormSuccessfullySubmitted === false})}>
-                    {isFormSuccessfullySubmitted ? 'Your message has been successfully sent! We will reply you as soon as possible. Thank you for your enquiry!' : 'There was an error sending your message, please try again.'}
+                <p className={classNames('mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500', {'h-0 opacity-0' : isFormSuccessfullySubmitted === undefined}, {'bg-emerald-100 mb-5 mt-10' : isFormSuccessfullySubmitted}, {'bg-rose-100 mb-5 mt-10' : isFormSuccessfullySubmitted === false})}>
+                    {isFormSuccessfullySubmitted ? getTranslationFromString('home.contact.form-success', translations) : getTranslationFromString('home.contact.form-error', translations)}
                 </p>
-                <form className="flex flex-col p-10 xl:mx-20 text-sm" onSubmit={(e) => handleFormSubmit(e)}>
+                <form className="flex flex-col px-10 pb-10 xl:mx-20 text-sm" onSubmit={(e) => handleFormSubmit(e)}>
                     <label>
                         <input
                         type="text" 

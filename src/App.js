@@ -2,12 +2,11 @@ import { useState, useEffect, useCallback } from "react"
 import MoonLoader from "react-spinners/ClipLoader"
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
-import { Seo } from './components/atoms/Seo'
 import { AppRoutes } from './routes/AppRoutes'
 import ReactGA from 'react-ga'
 import { locales } from './config/locales'
 import { capitalizeCountryFromLocale } from './helpers/transformLocale'
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID)
+ReactGA.initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID?.toString())
 
 const App = () => {
   const [pageContent, setPageContent] = useState(undefined)
@@ -40,7 +39,7 @@ const App = () => {
   }, [locale])
 
   useEffect(() => {
-    ReactGA.pageview(window?.location?.pathname + window?.location?.search);
+    ReactGA.pageview(window.location.pathname + window.location.search)
   }, [])
 
   if (!pageContent) {
@@ -54,10 +53,7 @@ const App = () => {
   }
 
   return (
-    <>
-      <Seo seoPageContent={pageContent?.seo}/>
-      <AppRoutes pageContent={pageContent} setLocale={setLocale} locale={locale}/>
-    </>
+      <AppRoutes pageContent={pageContent} locale={locale} setLocale={setLocale}/>
   )
 }
 

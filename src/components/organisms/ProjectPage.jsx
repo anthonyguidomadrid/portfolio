@@ -5,7 +5,7 @@ import { Header } from '../molecules/Header'
 import { ProjectDetail } from '../molecules/ProjectDetail'
 import { ProjectRecommendations } from '../molecules/ProjectRecommendations'
 
-export const ProjectPage = ({projectsContent, setLocale, translations}) => {
+export const ProjectPage = ({projectsContent, setLocale, translations, menuItems}) => {
     const { id, locale } = useParams()
     const [ selectedProject, setSelectedProject ] = useState(undefined)
     const navigate = useNavigate()
@@ -38,7 +38,7 @@ export const ProjectPage = ({projectsContent, setLocale, translations}) => {
 
     return (
         <>
-            <Header headerContent={selectedProject} isFullSize={false} displayBackBtn={true} locale={locale}/>
+            <Header headerContent={selectedProject} isFullSize={false} displayBackBtn={true} locale={locale} menuItems={menuItems}/>
             <ProjectDetail projectContent={selectedProject} translations={translations}/>
             <ProjectRecommendations translations={translations} selectedProject={selectedProject} projectsContent={projectsContent} locale={locale}/>
         </>
