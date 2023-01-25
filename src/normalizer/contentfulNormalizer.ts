@@ -1,9 +1,14 @@
 import dayjs from 'dayjs'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
+import { ContentfulResponse } from '~types/contentfulTypes'
+import { PageContent } from '~types/normalizedContentTypes'
 
 require('dayjs/locale/es')
 
-export const contentfulNormalizer = (response, locale) => ({
+export const contentfulNormalizer = (
+  response: ContentfulResponse,
+  locale: string | undefined
+): PageContent => ({
   ...(response.data?.aboutCollection?.items?.length && {
     about: {
       id: response?.data?.aboutCollection?.items?.[0]?.id,

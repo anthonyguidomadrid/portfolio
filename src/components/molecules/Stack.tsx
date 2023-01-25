@@ -1,15 +1,20 @@
-import { useEffect, useState } from 'react';
-import classNames from 'classnames';
-import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString';
-import { useIsFirstRender } from '../../customHooks/useIsFirstRender';
-import { ReactComponent as Chevron } from '../../assets/Chevron.svg';
+import { FunctionComponent, useEffect, useState } from 'react'
+import classNames from 'classnames'
+import { removeEmptySpaceAndHighCase } from '../../helpers/tranformString'
+import { useIsFirstRender } from '../../customHooks/useIsFirstRender'
+import { ReactComponent as Chevron } from '../../assets/Chevron.svg'
+import { NormalizedStack } from '~types/normalizedContentTypes'
 
-export function Stack({ stackContent }) {
-  const {
-    id, title, subtitle, technologies,
-  } = stackContent;
-  const isFirstRender = useIsFirstRender();
-  const [isAccordionOpen, setAccordionOpen] = useState(null);
+export type StackProps = {
+  stackContent: NormalizedStack
+}
+
+export const Stack: FunctionComponent<StackProps> = ({ stackContent }) => {
+  const { id, title, subtitle, technologies } = stackContent
+  const isFirstRender = useIsFirstRender()
+  const [isAccordionOpen, setAccordionOpen] = useState(
+    {} as { [key: string]: boolean }
+  )
 
   useEffect(() => {
     if (isFirstRender && technologies.length > 0) {
@@ -17,20 +22,20 @@ export function Stack({ stackContent }) {
         technologies.reduce(
           (o, key) => ({
             ...o,
-            [removeEmptySpaceAndHighCase(key.title)]: false,
+            [removeEmptySpaceAndHighCase(key.title)]: false
           }),
-          {},
-        ),
-      );
+          {}
+        )
+      )
     }
-  }, [isFirstRender, technologies]);
+  }, [isFirstRender, technologies])
 
-  const handleAccordionClick = (item) => {
-    const key = removeEmptySpaceAndHighCase(item);
-    const obj = { ...isAccordionOpen };
-    obj[key] = !obj[key];
-    return setAccordionOpen(obj);
-  };
+  const handleAccordionClick = (item: string) => {
+    const key = removeEmptySpaceAndHighCase(item)
+    const obj = { ...isAccordionOpen }
+    obj[key] = !obj[key]
+    return setAccordionOpen(obj)
+  }
 
   return (
     <section
@@ -48,22 +53,25 @@ export function Stack({ stackContent }) {
         </div>
       )}
       <div className="flex flex-col pb-16">
-        {isAccordionOpen
-          && technologies?.map((item, idx) => {
-            const { title, techList } = item;
-            const isOpen = isAccordionOpen?.[removeEmptySpaceAndHighCase(title)];
+        {Object.keys(isAccordionOpen).length > 0 &&
+          technologies?.map((item, idx) => {
+            const { title, techList } = item
+            const isOpen = isAccordionOpen?.[removeEmptySpaceAndHighCase(title)]
             return (
               <div
                 key={idx}
                 className={classNames({
-                  'border-b': idx + 1 !== technologies.length,
+                  'border-b': idx + 1 !== technologies.length
                 })}
               >
                 <div
+                  tabIndex={idx}
+                  role="button"
+                  onKeyDown={() => handleAccordionClick(title)}
                   onClick={() => handleAccordionClick(title)}
                   className={classNames(
                     'flex justify-between p-5 transition-all duration-500',
-                    { 'pb-10': isOpen },
+                    { 'pb-10': isOpen }
                   )}
                 >
                   <p className="font-extrabold text-lg">{title}</p>
@@ -78,7 +86,7 @@ export function Stack({ stackContent }) {
                       { 'max-h-96 pb-5': isOpen },
                       { 'sm:grid-rows-3': techList.length >= 3 },
                       { 'grid-rows-5': techList.length >= 5 },
-                      { 'grid-rows-2': techList.length < 5 },
+                      { 'grid-rows-2': techList.length < 5 }
                     )}
                   >
                     {techList.map((item, idx) => (
@@ -89,9 +97,9 @@ export function Stack({ stackContent }) {
                   </div>
                 )}
               </div>
-            );
+            )
           })}
       </div>
     </section>
-  );
+  )
 }

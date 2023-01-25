@@ -1,21 +1,36 @@
-import { useState, useMemo, useCallback } from "react";
-import { ReactComponent as Phone } from "../../assets/Phone.svg";
-import { ReactComponent as Email } from "../../assets/Email.svg";
-import classNames from "classnames";
-import emailjs from "emailjs-com";
-import { getTranslationFromString } from "../../helpers/getTranslationFromString";
+import {
+  useState,
+  useMemo,
+  useCallback,
+  FunctionComponent,
+  FormEvent
+} from 'react'
+import { ReactComponent as Phone } from '../../assets/Phone.svg'
+import { ReactComponent as Email } from '../../assets/Email.svg'
+import classNames from 'classnames'
+import { send } from 'emailjs-com'
+import { getTranslationFromString } from '../../helpers/getTranslationFromString'
+import { NormalizedContact, Translation } from '~types/normalizedContentTypes'
 
-export const Contact = ({ contactContent, translations }) => {
-  const { id, title, subtitle, description, email, phone } = contactContent;
+export type ContactProps = {
+  contactContent: NormalizedContact
+  translations: Translation[]
+}
+
+export const Contact: FunctionComponent<ContactProps> = ({
+  contactContent,
+  translations
+}) => {
+  const { id, title, subtitle, description, email, phone } = contactContent
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
   const [isFormSuccessfullySubmitted, setFormSuccessfullySubmitted] =
-    useState(undefined);
-  const [isFormLoading, setIsFormLoading] = useState(false);
+    useState('')
+  const [isFormLoading, setIsFormLoading] = useState(false)
   const isFormFullyFilled = useMemo(() => {
     if (
       formData.name &&
@@ -23,42 +38,40 @@ export const Contact = ({ contactContent, translations }) => {
       formData.subject &&
       formData.message
     ) {
-      return true;
+      return true
     } else {
-      return false;
+      return false
     }
-  }, [formData]);
+  }, [formData])
 
   const handleFormSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      setIsFormLoading(true);
-      await emailjs
-        .send(
-          process.env.REACT_APP_EMAILJS_SERVICE_ID,
-          process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-          formData,
-          process.env.REACT_APP_EMAILJS_USER_ID
-        )
-        .then(
-          () => {
-            setFormSuccessfullySubmitted(true);
-            setFormData({
-              name: "",
-              email: "",
-              subject: "",
-              message: "",
-            });
-            setIsFormLoading(false);
-          },
-          () => {
-            setFormSuccessfullySubmitted(false);
-            setIsFormLoading(false);
-          }
-        );
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault()
+      setIsFormLoading(true)
+      await send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID ?? '',
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID ?? '',
+        formData,
+        process.env.REACT_APP_EMAILJS_USER_ID
+      ).then(
+        () => {
+          setFormSuccessfullySubmitted('success')
+          setFormData({
+            name: '',
+            email: '',
+            subject: '',
+            message: ''
+          })
+          setIsFormLoading(false)
+        },
+        () => {
+          setFormSuccessfullySubmitted('failure')
+          setIsFormLoading(false)
+        }
+      )
     },
     [formData]
-  );
+  )
 
   return (
     <section className="md:flex" id={id}>
@@ -80,7 +93,7 @@ export const Contact = ({ contactContent, translations }) => {
         {phone && (
           <div className="flex font-medium text-gray-800">
             <Phone className="w-6 h-6 mr-3" />
-            <a href={`tel:${phone.replace("+", "00").replace(/ /g, "")}`}>
+            <a href={`tel:${phone.replace('+', '00').replace(/ /g, '')}`}>
               {phone}
             </a>
           </div>
@@ -89,33 +102,39 @@ export const Contact = ({ contactContent, translations }) => {
       <div className="md:w-1/2 order-1">
         <p
           className={classNames(
-            "mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500",
-            { "h-0 opacity-0": isFormSuccessfullySubmitted === undefined },
-            { "bg-emerald-100 mb-5 mt-10": isFormSuccessfullySubmitted },
-            { "bg-rose-100 mb-5 mt-10": isFormSuccessfullySubmitted === false }
+            'mx-10 p-5 md:my-5 font-bold text-sm text-center transition-all duration-500',
+            { 'h-0 opacity-0': isFormSuccessfullySubmitted === '' },
+            {
+              'bg-emerald-100 mb-5 mt-10':
+                isFormSuccessfullySubmitted === 'success'
+            },
+            {
+              'bg-rose-100 mb-5 mt-10':
+                isFormSuccessfullySubmitted === 'failure'
+            }
           )}
         >
-          {isFormSuccessfullySubmitted
+          {isFormSuccessfullySubmitted === 'success'
             ? getTranslationFromString(
-                "home.contact.form-success",
+                'home.contact.form-success',
                 translations
               )
-            : getTranslationFromString("home.contact.form-error", translations)}
+            : getTranslationFromString('home.contact.form-error', translations)}
         </p>
         <form
           className="flex flex-col px-10 pb-10 xl:mx-20 text-sm"
-          onSubmit={(e) => handleFormSubmit(e)}
+          onSubmit={e => handleFormSubmit(e)}
         >
           <label>
             <input
               type="text"
               placeholder={getTranslationFromString(
-                "home.contact.form.name",
+                'home.contact.form.name',
                 translations
               )}
               className="w-full border-b border-gray-500 h-10"
               value={formData.name}
-              onChange={(e) =>
+              onChange={e =>
                 setFormData({ ...formData, name: e?.target?.value })
               }
             />
@@ -124,12 +143,12 @@ export const Contact = ({ contactContent, translations }) => {
             <input
               type="email"
               placeholder={getTranslationFromString(
-                "home.contact.form.email",
+                'home.contact.form.email',
                 translations
               )}
               className="w-full border-b border-gray-500 h-10"
               value={formData.email}
-              onChange={(e) =>
+              onChange={e =>
                 setFormData({ ...formData, email: e?.target?.value })
               }
               disabled={isFormLoading}
@@ -139,12 +158,12 @@ export const Contact = ({ contactContent, translations }) => {
             <input
               type="text"
               placeholder={getTranslationFromString(
-                "home.contact.form.subject",
+                'home.contact.form.subject',
                 translations
               )}
               className="w-full border-b border-gray-500 h-10"
               value={formData.subject}
-              onChange={(e) =>
+              onChange={e =>
                 setFormData({ ...formData, subject: e?.target?.value })
               }
               disabled={isFormLoading}
@@ -152,14 +171,13 @@ export const Contact = ({ contactContent, translations }) => {
           </label>
           <label>
             <textarea
-              type="text"
               placeholder={getTranslationFromString(
-                "home.contact.form.message",
+                'home.contact.form.message',
                 translations
               )}
               className="w-full border-b border-gray-500 align-top h-36 pt-2"
               value={formData.message}
-              onChange={(e) =>
+              onChange={e =>
                 setFormData({ ...formData, message: e?.target?.value })
               }
               disabled={isFormLoading}
@@ -168,18 +186,18 @@ export const Contact = ({ contactContent, translations }) => {
           <input
             type="submit"
             value={getTranslationFromString(
-              "home.contact.form.submit",
+              'home.contact.form.submit',
               translations
             )}
             className={classNames(
-              "px-4 py-2 leading-none uppercase my-5 border",
+              'px-4 py-2 leading-none uppercase my-5 border',
               {
-                "text-gray-700 border-gray-700 hover:bg-gray-800 hover:text-white":
-                  isFormFullyFilled,
+                'text-gray-700 border-gray-700 hover:bg-gray-800 hover:text-white':
+                  isFormFullyFilled
               },
               {
-                "text-gray-400 border-gray-400":
-                  !isFormFullyFilled || isFormLoading,
+                'text-gray-400 border-gray-400':
+                  !isFormFullyFilled || isFormLoading
               }
             )}
             disabled={!isFormFullyFilled || isFormLoading}
@@ -187,5 +205,5 @@ export const Contact = ({ contactContent, translations }) => {
         </form>
       </div>
     </section>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-export const removeEmptySpaceAndHighCase = string => {
+export const removeEmptySpaceAndHighCase = (string: string): string => {
   if (!string) {
     return ''
   }

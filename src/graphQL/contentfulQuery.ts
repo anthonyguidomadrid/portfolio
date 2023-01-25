@@ -1,4 +1,4 @@
-export const graphQlQuery = locale => `
+export const graphQlQuery = (locale: string | undefined) => `
 {
   aboutCollection(limit: 1, locale: "${locale}") {
     items {

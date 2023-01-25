@@ -1,12 +1,21 @@
-const classNames = require('classnames');
+import type { FunctionComponent } from 'react'
+import classNames from 'classnames'
 
-export function Button({
+export type ButtonProps = {
+  text: string
+  link: string
+  additionalClasses: string
+  newTab: boolean
+  variant?: string
+}
+
+export const Button: FunctionComponent<ButtonProps> = ({
   text,
   link,
   additionalClasses,
   newTab,
-  variant = 'white',
-}) {
+  variant = 'white'
+}) => {
   return (
     <a
       href={link}
@@ -15,14 +24,14 @@ export function Button({
         'inline-block text-sm px-4 py-2 leading-none border',
         {
           'text-white border-white hover:border-transparent hover:text-black hover:bg-white':
-            variant === 'white',
+            variant === 'white'
         },
         { 'border-black hover:bg-black hover:text-white': variant === 'black' },
-        additionalClasses,
+        additionalClasses
       )}
       rel="noreferrer"
     >
       {text}
     </a>
-  );
+  )
 }

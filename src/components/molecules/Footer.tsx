@@ -1,10 +1,28 @@
-import { HashLink as Link } from "react-router-hash-link";
+import { FunctionComponent } from 'react'
+import { HashLink as Link } from 'react-router-hash-link'
+import {
+  NormalizedLogo,
+  NormalizedMenuItem,
+  NormalizedSocialMedia
+} from '~types/normalizedContentTypes'
 
-export const Footer = ({ logo, footerItems, socialMedia, locale }) => {
+export type FooterProps = {
+  logo: NormalizedLogo
+  footerItems: NormalizedMenuItem[]
+  socialMedia: NormalizedSocialMedia[]
+  locale: string
+}
+
+export const Footer: FunctionComponent<FooterProps> = ({
+  logo,
+  footerItems,
+  socialMedia,
+  locale
+}) => {
   return (
     <section className="bg-slate-900 text-white px-10 md:px-24">
       <div className="py-10">
-        <Link smooth to={locale ? `${locale}/#top` : "/#top"}>
+        <Link smooth to={locale ? `${locale}/#top` : '/#top'}>
           <img
             src={logo?.url}
             alt={logo?.description}
@@ -15,7 +33,7 @@ export const Footer = ({ logo, footerItems, socialMedia, locale }) => {
       <div className="border-y border-slate-600 p-10 flex justify-center max-w-screen-lg mx-auto">
         {footerItems?.length &&
           footerItems.map((item, idx) => {
-            const { link, name } = item;
+            const { link, name } = item
             return (
               <Link
                 key={idx}
@@ -25,7 +43,7 @@ export const Footer = ({ logo, footerItems, socialMedia, locale }) => {
               >
                 {name}
               </Link>
-            );
+            )
           })}
       </div>
       {socialMedia?.length && (
@@ -35,7 +53,7 @@ export const Footer = ({ logo, footerItems, socialMedia, locale }) => {
               <a key={idx} href={elm.link} target="_blank" rel="noreferrer">
                 <img src={elm.url} alt={elm.name} className="h-7 w-7 mx-2" />
               </a>
-            );
+            )
           })}
         </div>
       )}
@@ -53,5 +71,5 @@ export const Footer = ({ logo, footerItems, socialMedia, locale }) => {
         </a>
       </div>
     </section>
-  );
-};
+  )
+}

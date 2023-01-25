@@ -1,8 +1,18 @@
-import { Button } from "../atoms/Button";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { getTranslationFromString } from "../../helpers/getTranslationFromString";
+import { Button } from '../atoms/Button'
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import { getTranslationFromString } from '../../helpers/getTranslationFromString'
+import { FunctionComponent } from 'react'
+import { NormalizedProject, Translation } from '~types/normalizedContentTypes'
 
-export const ProjectDetail = ({ projectContent, translations }) => {
+export type ProjectDetail = {
+  projectContent: NormalizedProject | Record<string, never>
+  translations: Translation[]
+}
+
+export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
+  projectContent,
+  translations
+}) => {
   const {
     codeSourceLink,
     creationDate,
@@ -11,8 +21,8 @@ export const ProjectDetail = ({ projectContent, translations }) => {
     projectLink,
     tags,
     title,
-    subtitle,
-  } = projectContent;
+    subtitle
+  } = projectContent
 
   return (
     <section className="lg:flex items-center">
@@ -20,16 +30,16 @@ export const ProjectDetail = ({ projectContent, translations }) => {
         {images.length > 0 && (
           <Splide
             options={{
-              rewind: true,
+              rewind: true
             }}
           >
             {images.map((image, idx) => {
-              const { url, description } = image;
+              const { url, description } = image
               return (
                 <SplideSlide key={idx}>
                   <img src={url} alt={description} />
                 </SplideSlide>
-              );
+              )
             })}
           </Splide>
         )}
@@ -40,7 +50,7 @@ export const ProjectDetail = ({ projectContent, translations }) => {
         {subtitle && (
           <p
             className={
-              "font-mono text-2xl lg:text-3xl text-gray-500 my-5 lg:pb-5"
+              'font-mono text-2xl lg:text-3xl text-gray-500 my-5 lg:pb-5'
             }
           >
             {subtitle}
@@ -53,30 +63,30 @@ export const ProjectDetail = ({ projectContent, translations }) => {
           {projectLink && (
             <Button
               text={getTranslationFromString(
-                "project-details.cta.project",
+                'project-details.cta.project',
                 translations
               )}
               link={projectLink}
               newTab={true}
-              additionalClasses={"uppercase mr-4"}
-              variant={"black"}
+              additionalClasses={'uppercase mr-4'}
+              variant={'black'}
             />
           )}
           {codeSourceLink && (
             <Button
               text={getTranslationFromString(
-                "project-details.cta.code",
+                'project-details.cta.code',
                 translations
               )}
               link={codeSourceLink}
               newTab={true}
-              additionalClasses={"uppercase"}
-              variant={"black"}
+              additionalClasses={'uppercase'}
+              variant={'black'}
             />
           )}
         </div>
-        {tags.length > 0 && <p className="italic">Tags: {tags.join(", ")}</p>}
+        {tags.length > 0 && <p className="italic">Tags: {tags.join(', ')}</p>}
       </div>
     </section>
-  );
-};
+  )
+}

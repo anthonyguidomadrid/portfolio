@@ -1,9 +1,17 @@
-import "@splidejs/react-splide/css";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import { HashLink as Link } from "react-router-hash-link";
+import '@splidejs/react-splide/css'
+import { Splide, SplideSlide } from '@splidejs/react-splide'
+import { HashLink as Link } from 'react-router-hash-link'
+import { FunctionComponent } from 'react'
+import { NormalizedProjectObject } from '~types/normalizedContentTypes'
 
-export const ProjectSlider = ({ projectContent }) => {
-  const { title, subtitle, id } = projectContent;
+export type ProjectSliderProps = {
+  projectContent: NormalizedProjectObject
+}
+
+export const ProjectSlider: FunctionComponent<ProjectSliderProps> = ({
+  projectContent
+}) => {
+  const { title, subtitle, id } = projectContent
 
   return (
     <section id={id}>
@@ -17,26 +25,26 @@ export const ProjectSlider = ({ projectContent }) => {
           )}
         </div>
       )}
-    <Splide
+      <Splide
         options={{
-          type: "fade",
-          rewind: true,
+          type: 'fade',
+          rewind: true
         }}
       >
         {projectContent?.projects?.map((project, idx) => {
-          const { thumbnail, creationDate, slug, title, tags } = project;
+          const { thumbnail, creationDate, slug, title, tags } = project
           return (
             <SplideSlide key={idx}>
               <div
                 style={{
-                  backgroundColor: "#bfbfbf",
-                  backgroundBlendMode: "multiply",
+                  backgroundColor: '#bfbfbf',
+                  backgroundBlendMode: 'multiply',
                   backgroundImage: `url(${
-                    thumbnail?.url ?? "../../default-banner-image.jpeg"
+                    thumbnail?.url ?? '../../default-banner-image.jpeg'
                   })`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
                 }}
                 className="text-white px-20 h-96 flex flex-col justify-center drop-shadow transition-transform duration-500 hover:opacity-95"
               >
@@ -58,16 +66,16 @@ export const ProjectSlider = ({ projectContent }) => {
                           <span key={idx} className="text-sm font-medium">
                             {tag}
                           </span>
-                        );
+                        )
                       })}
                     </div>
                   )}
                 </Link>
               </div>
             </SplideSlide>
-          );
+          )
         })}
       </Splide>
     </section>
-  );
-};
+  )
+}

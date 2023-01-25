@@ -1,4 +1,4 @@
-export const capitalizeCountryFromLocale = locale => {
+export const capitalizeCountryFromLocale = (locale: string | undefined) => {
   if (!locale) {
     return ''
   }
