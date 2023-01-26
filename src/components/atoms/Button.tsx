@@ -4,8 +4,8 @@ import classNames from 'classnames'
 export type ButtonProps = {
   text: string | undefined
   link: string
-  additionalClasses: string
-  newTab: boolean
+  additionalClasses?: string
+  newTab?: boolean
   variant?: string
 }
 
@@ -18,6 +18,7 @@ export const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   return (
     <a
+      data-testid="button"
       href={link}
       target={newTab ? '_blank' : '_self'}
       className={classNames(

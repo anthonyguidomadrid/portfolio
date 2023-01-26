@@ -12,7 +12,10 @@ export const ChevronButton: FunctionComponent<ChevronButtonProps> = ({
   isSubMenuOpen
 }) => {
   return (
-    <button onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}>
+    <button
+      data-testid="chevron"
+      onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}
+    >
       <Chevron
         className={classNames(
           'mr-4 ml-2 h-2 w-2 text-slate-200/75 mb-1.5 md:mb-0',
