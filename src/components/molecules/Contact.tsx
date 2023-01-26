@@ -14,7 +14,7 @@ import { NormalizedContact, Translation } from '~types/normalizedContentTypes'
 
 export type ContactProps = {
   contactContent: NormalizedContact
-  translations: Translation[]
+  translations: Translation[] | undefined
 }
 
 export const Contact: FunctionComponent<ContactProps> = ({

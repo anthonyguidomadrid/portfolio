@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { ContentfulResponse } from '~types/contentfulTypes'
 import { PageContent } from '~types/normalizedContentTypes'
-
 require('dayjs/locale/es')
 
 export const contentfulNormalizer = (
@@ -28,21 +27,23 @@ export const contentfulNormalizer = (
       }
     }
   }),
-  assets: {
-    logo: {
-      url: response?.data?.assetsCollection?.items?.[0].logo?.url,
-      description:
-        response?.data?.assetsCollection?.items?.[0]?.logo?.description
-    },
-    socialMedia:
-      response?.data?.assetsCollection?.items?.[0]?.socialMediaCollection?.items?.map(
-        elm => ({
-          url: elm?.url,
-          name: elm?.title,
-          link: elm?.description
-        })
-      )
-  },
+  ...(response.data?.assetsCollection?.items?.length && {
+    assets: {
+      logo: {
+        url: response?.data?.assetsCollection?.items?.[0].logo?.url,
+        description:
+          response?.data?.assetsCollection?.items?.[0]?.logo?.description
+      },
+      socialMedia:
+        response?.data?.assetsCollection?.items?.[0]?.socialMediaCollection?.items?.map(
+          elm => ({
+            url: elm?.url,
+            name: elm?.title,
+            link: elm?.description
+          })
+        )
+    }
+  }),
   ...(response.data?.contactCollection?.items?.length && {
     contact: {
       id: response?.data?.contactCollection?.items?.[0]?.id,
@@ -78,13 +79,17 @@ export const contentfulNormalizer = (
         isCta: item.cta
       }))
   }),
-  ...(response.data?.aboutCollection?.items?.length && {
+  ...(response.data?.projectCollection?.items?.length && {
     project: {
       id: response?.data?.projectHeaderCollection?.items?.[0].id,
       title: response?.data?.projectHeaderCollection?.items?.[0].title,
       subtitle: response?.data?.projectHeaderCollection?.items?.[0].subtitle,
       projects: response?.data?.projectCollection?.items
-        ?.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate))
+        ?.sort(
+          (a, b) =>
+            new Date(b.creationDate)?.valueOf() -
+            new Date(a.creationDate)?.valueOf()
+        )
         .map(project => {
           const date = dayjs(project.creationDate)
             .locale(locale ? locale.slice(0, 2) : 'en')
@@ -110,13 +115,15 @@ export const contentfulNormalizer = (
         })
     }
   }),
-  seo: {
-    title: response?.data?.seoCollection?.items?.[0]?.title,
-    description: response?.data?.seoCollection?.items?.[0]?.description,
-    touchIcon: response?.data?.seoCollection?.items?.[0]?.appleTouchIcon?.url,
-    favicon: response?.data?.seoCollection?.items?.[0]?.favicon?.url,
-    thumbnail: response?.data?.seoCollection?.items?.[0]?.thumbnail?.url
-  },
+  ...(response.data?.seoCollection?.items?.length && {
+    seo: {
+      title: response?.data?.seoCollection?.items?.[0]?.title,
+      description: response?.data?.seoCollection?.items?.[0]?.description,
+      touchIcon: response?.data?.seoCollection?.items?.[0]?.appleTouchIcon?.url,
+      favicon: response?.data?.seoCollection?.items?.[0]?.favicon?.url,
+      thumbnail: response?.data?.seoCollection?.items?.[0]?.thumbnail?.url
+    }
+  }),
   ...(response?.data?.stackTechCollection?.items?.length > 0 && {
     stack: {
       id: response?.data?.stackCollection?.items?.[0]?.id,

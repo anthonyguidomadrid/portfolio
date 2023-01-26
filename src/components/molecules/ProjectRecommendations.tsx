@@ -6,9 +6,9 @@ import { NormalizedProject, Translation } from '~types/normalizedContentTypes'
 import { FunctionComponent } from 'react'
 
 export type ProjectRecommendationsProps = {
-  translations: Translation[]
+  translations: Translation[] | undefined
   selectedProject: NormalizedProject | Record<string, never>
-  projectsContent: NormalizedProject[]
+  projectsContent: NormalizedProject[] | undefined
   locale: string | undefined
 }
 
@@ -37,46 +37,47 @@ export const ProjectRecommendations: FunctionComponent<
           gap: '1rem'
         }}
       >
-        {recommendedProjects.map((project, idx) => {
-          const { thumbnail, slug, title, subtitle } = project
-          return (
-            <SplideSlide key={idx}>
-              <Link
-                smooth
-                to={
-                  locale
-                    ? `/${locale}/projects/${slug}#top`
-                    : `/projects/${slug}#top`
-                }
-              >
-                <div
-                  style={{
-                    backgroundColor: '#d0d0d0',
-                    backgroundBlendMode: 'multiply',
-                    backgroundImage: `url(${
-                      thumbnail?.url ?? '../../default-banner-image.jpeg'
-                    })`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                  className="text-white px-20 h-full flex flex-col justify-center drop-shadow transition-transform duration-500 hover:opacity-95"
+        {recommendedProjects &&
+          recommendedProjects.map((project, idx) => {
+            const { thumbnail, slug, title, subtitle } = project
+            return (
+              <SplideSlide key={idx}>
+                <Link
+                  smooth
+                  to={
+                    locale
+                      ? `/${locale}/projects/${slug}#top`
+                      : `/projects/${slug}#top`
+                  }
                 >
-                  {title && (
-                    <h4 className="text-2xl md:text-3xl font-bold font-mono">
-                      {title}
-                    </h4>
-                  )}
-                  {subtitle && (
-                    <p className="text-sm md:text-base uppercase mt-3">
-                      {subtitle}
-                    </p>
-                  )}
-                </div>
-              </Link>
-            </SplideSlide>
-          )
-        })}
+                  <div
+                    style={{
+                      backgroundColor: '#d0d0d0',
+                      backgroundBlendMode: 'multiply',
+                      backgroundImage: `url(${
+                        thumbnail?.url ?? '../../default-banner-image.jpeg'
+                      })`,
+                      backgroundRepeat: 'no-repeat',
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                    className="text-white px-20 h-full flex flex-col justify-center drop-shadow transition-transform duration-500 hover:opacity-95"
+                  >
+                    {title && (
+                      <h4 className="text-2xl md:text-3xl font-bold font-mono">
+                        {title}
+                      </h4>
+                    )}
+                    {subtitle && (
+                      <p className="text-sm md:text-base uppercase mt-3">
+                        {subtitle}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              </SplideSlide>
+            )
+          })}
       </Splide>
     </section>
   )

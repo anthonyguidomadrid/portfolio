@@ -2,7 +2,7 @@ import { Translation } from '~types/normalizedContentTypes'
 
 export const getTranslationFromString = (
   string: string | undefined,
-  translations: Translation[]
+  translations: Translation[] | undefined
 ) => {
   const translation = translations?.find(
     translation => translation.string === string

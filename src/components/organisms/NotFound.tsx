@@ -4,9 +4,8 @@ import { Dispatch, FunctionComponent, SetStateAction, useEffect } from 'react'
 import { NormalizedHeader } from '~types/normalizedContentTypes'
 
 export type NotFoundProps = {
-  headerContent: NormalizedHeader[]
+  headerContent: NormalizedHeader[] | undefined
   setLocale: Dispatch<SetStateAction<string | undefined>>
-  locale: string
 }
 
 export const NotFound: FunctionComponent<NotFoundProps> = ({
@@ -20,7 +19,10 @@ export const NotFound: FunctionComponent<NotFoundProps> = ({
 
   return (
     <Header
-      headerContent={headerContent.find(header => header.type === 'notFound')}
+      headerContent={
+        headerContent &&
+        headerContent.find(header => header.type === 'notFound')
+      }
       locale={locale}
     />
   )

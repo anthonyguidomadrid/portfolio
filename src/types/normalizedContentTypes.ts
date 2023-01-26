@@ -1,15 +1,15 @@
 import { ReactNode } from 'react'
 
 export type PageContent = {
-  about: NormalizedAbout
-  assets: NormalizedAssets
-  contact: NormalizedContact
-  headers: NormalizedHeader[]
-  menuItems: NormalizedMenuItem[]
-  project: NormalizedProjectObject
-  seo: NormalizedSeo
-  stack: NormalizedStack
-  translations: Translation[]
+  about?: NormalizedAbout
+  assets?: NormalizedAssets
+  contact?: NormalizedContact
+  headers?: NormalizedHeader[]
+  menuItems?: NormalizedMenuItem[]
+  project?: NormalizedProjectObject
+  seo?: NormalizedSeo
+  stack?: NormalizedStack
+  translations?: Translation[]
 }
 
 export type NormalizedAbout = {

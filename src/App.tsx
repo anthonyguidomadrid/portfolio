@@ -6,12 +6,15 @@ import { graphQlQuery } from './graphQL/contentfulQuery'
 import { AppRoutes } from './routes/AppRoutes'
 import { locales } from './config/locales'
 import { capitalizeCountryFromLocale } from './helpers/transformLocale'
+import { PageContent } from '~types/normalizedContentTypes'
 
-initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID?.toString())
+initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID?.toString() ?? '')
 
 function App() {
-  const [pageContent, setPageContent] = useState(undefined)
-  const [locale, setLocale] = useState(undefined)
+  const [pageContent, setPageContent] = useState<
+    PageContent | Record<string, never>
+  >({})
+  const [locale, setLocale] = useState<string | undefined>(undefined)
 
   const fetchContent = useCallback(async () => {
     fetch(
@@ -48,7 +51,7 @@ function App() {
     pageview(window.location.pathname + window.location.search)
   }, [])
 
-  if (!pageContent) {
+  if (Object.keys(pageContent).length === 0) {
     return (
       <div className="grid place-items-center h-screen">
         <MoonLoader size={120} />

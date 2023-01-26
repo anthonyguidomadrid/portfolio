@@ -7,10 +7,10 @@ import {
 } from '~types/normalizedContentTypes'
 
 export type FooterProps = {
-  logo: NormalizedLogo
-  footerItems: NormalizedMenuItem[]
-  socialMedia: NormalizedSocialMedia[]
-  locale: string
+  logo: NormalizedLogo | undefined
+  footerItems: NormalizedMenuItem[] | undefined
+  socialMedia: NormalizedSocialMedia[] | undefined
+  locale: string | undefined
 }
 
 export const Footer: FunctionComponent<FooterProps> = ({

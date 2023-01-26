@@ -17,10 +17,10 @@ import { ProjectDetail } from '../molecules/ProjectDetail'
 import { ProjectRecommendations } from '../molecules/ProjectRecommendations'
 
 export type ProjectPageProps = {
-  projectsContent: NormalizedProject[]
+  projectsContent: NormalizedProject[] | undefined
   setLocale: Dispatch<SetStateAction<string | undefined>>
-  translations: Translation[]
-  menuItems: NormalizedMenuItem[]
+  translations: Translation[] | undefined
+  menuItems: NormalizedMenuItem[] | undefined
 }
 
 export const ProjectPage: FunctionComponent<ProjectPageProps> = ({
@@ -40,9 +40,11 @@ export const ProjectPage: FunctionComponent<ProjectPageProps> = ({
 
   useEffect(() => {
     if (id) {
-      const queriedProject = projectsContent.find(project => {
-        return project.slug === id
-      })
+      const queriedProject =
+        projectsContent &&
+        projectsContent.find(project => {
+          return project.slug === id
+        })
       if (queriedProject) {
         setSelectedProject(queriedProject)
       } else {

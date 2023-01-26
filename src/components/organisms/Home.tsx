@@ -24,9 +24,10 @@ export const Home: FunctionComponent<HomeProps> = ({
   return (
     <>
       <Header
-        headerContent={pageContent?.headers.find(
-          header => header.type === 'home'
-        )}
+        headerContent={
+          pageContent?.headers &&
+          pageContent?.headers.find(header => header.type === 'home')
+        }
         locale={locale}
       />
       {pageContent?.about && (

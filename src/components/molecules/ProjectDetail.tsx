@@ -6,7 +6,7 @@ import { NormalizedProject, Translation } from '~types/normalizedContentTypes'
 
 export type ProjectDetail = {
   projectContent: NormalizedProject | Record<string, never>
-  translations: Translation[]
+  translations: Translation[] | undefined
 }
 
 export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
@@ -27,7 +27,7 @@ export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
   return (
     <section className="lg:flex items-center">
       <div className="lg:w-1/2">
-        {images.length > 0 && (
+        {images?.length > 0 && (
           <Splide
             options={{
               rewind: true
@@ -85,7 +85,7 @@ export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
             />
           )}
         </div>
-        {tags.length > 0 && <p className="italic">Tags: {tags.join(', ')}</p>}
+        {tags?.length > 0 && <p className="italic">Tags: {tags.join(', ')}</p>}
       </div>
     </section>
   )

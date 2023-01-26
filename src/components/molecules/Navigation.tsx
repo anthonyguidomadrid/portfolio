@@ -17,10 +17,10 @@ import {
 } from '~types/normalizedContentTypes'
 
 export type NavigationProps = {
-  logo: NormalizedLogo
-  menuItems: NormalizedMenuItem[]
-  locale: string
-  projectsContent: NormalizedProject[]
+  logo: NormalizedLogo | undefined
+  menuItems: NormalizedMenuItem[] | undefined
+  locale: string | undefined
+  projectsContent: NormalizedProject[] | undefined
 }
 
 export const Navigation: FunctionComponent<NavigationProps> = ({
@@ -121,15 +121,18 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
                       />
                     )}
                   </div>
-                  {isMobile && isProject && (
-                    <MobileSubMenu
-                      projectsContent={projectsContent}
-                      locale={locale}
-                      isSubMenuOpen={isSubMenuOpen}
-                      setMenuOpen={setMenuOpen}
-                      setIsSubMenuOpen={setIsSubMenuOpen}
-                    />
-                  )}
+                  {isMobile &&
+                    isProject &&
+                    projectsContent &&
+                    projectsContent?.length > 0 && (
+                      <MobileSubMenu
+                        projectsContent={projectsContent}
+                        locale={locale}
+                        isSubMenuOpen={isSubMenuOpen}
+                        setMenuOpen={setMenuOpen}
+                        setIsSubMenuOpen={setIsSubMenuOpen}
+                      />
+                    )}
                 </>
               ) : (
                 <>
@@ -153,15 +156,18 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
                       />
                     )}
                   </div>
-                  {isMobile && isProject && (
-                    <MobileSubMenu
-                      projectsContent={projectsContent}
-                      locale={locale}
-                      isSubMenuOpen={isSubMenuOpen}
-                      setMenuOpen={setMenuOpen}
-                      setIsSubMenuOpen={setIsSubMenuOpen}
-                    />
-                  )}
+                  {isMobile &&
+                    isProject &&
+                    projectsContent &&
+                    projectsContent?.length > 0 && (
+                      <MobileSubMenu
+                        projectsContent={projectsContent}
+                        locale={locale}
+                        isSubMenuOpen={isSubMenuOpen}
+                        setMenuOpen={setMenuOpen}
+                        setIsSubMenuOpen={setIsSubMenuOpen}
+                      />
+                    )}
                 </>
               )
             })}
@@ -216,7 +222,8 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
             { 'opacity-100 max-h-96 p-5': isSubMenuOpen }
           )}
         >
-          {projectsContent.length > 0 &&
+          {projectsContent &&
+            projectsContent.length > 0 &&
             projectsContent.map((project, idx) => {
               const { title, slug } = project
               const isCurrent = location.pathname?.includes(slug)

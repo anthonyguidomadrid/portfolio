@@ -6,7 +6,7 @@ import { NormalizedProject } from '~types/normalizedContentTypes'
 
 export type MobileSubMenuProps = {
   projectsContent: NormalizedProject[]
-  locale: string
+  locale: string | undefined
   isSubMenuOpen: boolean
   setMenuOpen: Dispatch<SetStateAction<boolean>>
   setIsSubMenuOpen: Dispatch<SetStateAction<boolean>>

@@ -2,7 +2,7 @@ import type { FunctionComponent } from 'react'
 import classNames from 'classnames'
 
 export type ButtonProps = {
-  text: string
+  text: string | undefined
   link: string
   additionalClasses: string
   newTab: boolean
