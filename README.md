@@ -1,12 +1,12 @@
 # Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Contentful was used as a CMS for all the content displayed.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and Contentful was used as a CMS for all the content displayed. The entire app has been coded with Typescript and Jest Unit Testing has been incorporated into this project.
 
 ## Previews
 
-![screenshot1](https://user-images.githubusercontent.com/80059432/211064460-9f57ac9f-f6f7-4d72-a238-6468af1102fc.jpg)
+![portfolio-preview-1](https://user-images.githubusercontent.com/80059432/215153243-f6688164-8873-4d1d-add8-753dfe52f461.jpg)
 
-![screenshot2](https://user-images.githubusercontent.com/80059432/211064470-9d770925-438e-4cf3-bed2-d283f1936ea8.jpg)
+![portfolio-preview-2](https://user-images.githubusercontent.com/80059432/215153263-c0a54d9b-449d-4e09-a628-816b2e6e8a8a.jpg)
 
 ## Variables
 
@@ -16,12 +16,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 `REACT_APP_EMAILJS_TEMPLATE_ID=`\
 `REACT_APP_EMAILJS_USER_ID=`\
 [EmailJS Documentation](https://www.emailjs.com/docs/sdk/send/)
+`REACT_APP_GOOGLE_TRACKING_ID=` // Google Analytics tracking ID
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm start / yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -29,34 +30,66 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm run deploy`
+### `npm lint / yarn lint`
+
+Review the code formatting and returns some errors.
+
+### `npm lint:fix / yarn lint:fix`
+
+Fix the automatically fixable errors returned by the previous script.
+
+### `npm tsc/ yarn tsc`
+
+Review the typescript code and returns type errors.
+
+### `npm test/ yarn test`
+
+Run the Jest unit tests and returns the results in terms of test coverage.
+
+### `npm verify/ yarn verify`
+
+Run the `lint`, `tsc` and `test` scripts at the same time.
+
+### `npm run deploy / yarn deploy`
 
 Builds the app for production and deploy to [https://anthonyguido.dev/](https://anthonyguido.dev/) via Github Pages.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+### `npm serve/ yarn serve`
+
+Serve the last built app on local.
+
 ## Libraries
 
-Here is the list of the libraries installed for this project:
+Here is the list of the most important libraries installed for this project:
 
 - `classnames`
 - `dayjs`
 - `emailjs-com`
+- `es-lint`
+- `jest`
+- `prettier`
+- `react-ga4`
 - `react-router-dom`
 - `react-router-hash-link`
 - `react-scripts`
+- `react-snap`
 - `react-spinners`
-- `tailwind`
+- `splide`
+- `tailwindcss`
+- `typescript`
 
 ## Contentful Content Models
 
 ```
 {
-  aboutCollection(limit: 1) {
+  aboutCollection(limit: 1, locale) {
     items {
+      id: string
       title: string
       subtitle: string[]
       description {
-        json
+        json: Document
       }
       image {
         url: string
@@ -82,19 +115,20 @@ Here is the list of the libraries installed for this project:
         }
       }
     }
-  }
-  contactCollection(limit: 1) {
+  } 
+  contactCollection(limit: 1, locale) {
     items {
+      id: string
       title: string
       subtitle: string
       description {
-        json
+        json: Document
       }
       email: string
       phone: string
     }
   }
-  headerCollection(limit: 1) {
+  headerCollection(limit: 2, locale) {
     items {
       title: string
       subtitle: string
@@ -104,22 +138,26 @@ Here is the list of the libraries installed for this project:
       }
       cta: string
       ctaLink: string
+      type: string
     }
   }
-  menuCollection(limit: 1) {
+  menuItemCollection(limit: 10, locale) {
     items {
-      menuItems: string[]
-      cta: string
+      name: string
+      link: string
+      index: number
+      isProject: boolean
+      cta: boolean
     }
   }
-  projectCollection {
+  projectCollection(locale) {
     items {
       creationDate: Date
       slug: string
       title: string
       subtitle: string
       description {
-        json
+        json: Document
       }
       thumbnail {
         url: string
@@ -136,13 +174,14 @@ Here is the list of the libraries installed for this project:
       tags: string[]
     }
   }
-  projectHeaderCollection(limit: 1) {
+  projectHeaderCollection(limit: 1, locale) {
     items {
+      id: string
       title: string
       subtitle: string
     }
   }
-  seoCollection(limit: 1) {
+  seoCollection(limit: 1, locale) {
     items {
       title: string
       description: string
@@ -157,16 +196,23 @@ Here is the list of the libraries installed for this project:
       }
     }
   }
-  stackCollection(limit: 1) {
+  stackCollection(limit: 1, locale) {
     items {
+      id: string
       title: string
       subtitle: string
     }
   }
-  stackTechCollection {
+  stackTechCollection(locale) {
     items {
       title: string
-      technologies: string[]
+      technologies: string
+    }
+  }
+  translationCollection(locale) {
+    items {
+      string: string
+      translation: string
     }
   }
 }
