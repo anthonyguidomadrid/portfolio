@@ -9,13 +9,13 @@ export type PageContent = {
   project?: NormalizedProjectObject
   seo?: NormalizedSeo
   stack?: NormalizedStack
-  translations?: Translation[]
+  translations?: NormalizedTranslation[]
 }
 
 export type NormalizedAbout = {
   id: string
   title: string
-  subtitle: string
+  subtitle: string[]
   description: string
   image: {
     url: string
@@ -119,7 +119,7 @@ export type NormalizedTechnology = {
   techList: string[]
 }
 
-export type Translation = {
+export type NormalizedTranslation = {
   string: string
   translation: string
 }

@@ -14,7 +14,7 @@ export const ProjectSlider: FunctionComponent<ProjectSliderProps> = ({
   const { title, subtitle, id } = projectContent
 
   return (
-    <section id={id}>
+    <section id={id} data-testid="project-slider">
       {title && (
         <div className="text-center text-slate-900 my-14 px-10 md:px-24">
           <h2 className="uppercase font-bold text-xl">{title}</h2>

@@ -54,7 +54,7 @@
       "**/*.tsx",
       "src/components", 
       "src/custom.d.ts"
-, "src/index.js"    ],
+, "src/index.js", "src/__mocks__/matchmedia.mock"    ],
     "exclude": [
       "build",
       "node_modules"

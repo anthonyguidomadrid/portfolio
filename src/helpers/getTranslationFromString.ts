@@ -1,8 +1,8 @@
-import { Translation } from '~types/normalizedContentTypes'
+import { NormalizedTranslation } from '~types/normalizedContentTypes'
 
 export const getTranslationFromString = (
   string: string | undefined,
-  translations: Translation[] | undefined
+  translations: NormalizedTranslation[] | undefined
 ) => {
   const translation = translations?.find(
     translation => translation.string === string

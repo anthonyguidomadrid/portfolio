@@ -39,6 +39,7 @@ export const Stack: FunctionComponent<StackProps> = ({ stackContent }) => {
 
   return (
     <section
+      data-testid="stack"
       id={id}
       className="bg-slate-900 text-white px-10 md:px-36 lg:px-48 xl:px-80 transition-all duration-500"
     >

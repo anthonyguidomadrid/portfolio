@@ -52,6 +52,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
 
   return (
     <nav
+      data-testid="menu"
       className={classNames(
         'flex items-center justify-between flex-wrap p-6 fixed top-0 w-full z-50 transition-all duration-500',
         {
@@ -62,6 +63,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
     >
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <HashLink
+          data-testid="navigation-logo"
           smooth
           to={locale ? `${locale}/#top` : '/#top'}
           onClick={() => setMenuOpen(false)}
@@ -75,6 +77,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
       </div>
       <div className="block md:hidden">
         <button
+          data-testid="mobile-hamburger"
           className="flex items-center px-3 py-2 border text-white border-white-400 hover:text-white hover:border-white"
           onClick={() => setMenuOpen(!isMenuOpen)}
         >
@@ -82,6 +85,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         </button>
       </div>
       <div
+        data-testid="mobile-menu"
         className={classNames(
           'w-full block flex-grow md:flex md:items-center md:w-auto transition-all duration-500',
           {
@@ -99,6 +103,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
                   <div className="flex md:inline items-end">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                     <Link
+                      data-testid="scroll-link"
                       key={idx}
                       activeStyle={{ color: '#ffffff' }}
                       className={classNames(
@@ -138,6 +143,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
                 <>
                   <div className="flex md:inline items-end">
                     <HashLink
+                      data-testid="hash-link"
                       key={idx}
                       className={classNames(
                         'block mt-4 md:inline-block md:mt-0 text-slate-200/75 hover:text-white',
@@ -177,6 +183,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
             isHomePage ? (
               // eslint-disable-next-line jsx-a11y/anchor-is-valid
               <Link
+                data-testid="cta-link"
                 key="cta"
                 activeStyle={{ borderColor: '#ffffff' }}
                 to={`${ctaMenuItem.link}`}
@@ -207,6 +214,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
         </div>
         <div className="md:ml-4">
           <HashLink
+            data-testid="language-switcher"
             smooth
             to={locale ? currentPath : `/${locales.spain}${currentPath}`}
             onClick={() => setMenuOpen(false)}
@@ -217,6 +225,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
       </div>
       {!isMobile && (
         <div
+          data-testid="desktop-submenu"
           className={classNames(
             'absolute top-20 left-28 text-sm text-slate-200/75 bg-slate-900 bg-opacity-80 flex flex-col opacity-0 ease-in duration-200 max-h-0',
             { 'opacity-100 max-h-96 p-5': isSubMenuOpen }
@@ -230,6 +239,7 @@ export const Navigation: FunctionComponent<NavigationProps> = ({
 
               return !isSubMenuOpen ? null : (
                 <HashLink
+                  data-testid="submenu-link"
                   key={idx}
                   smooth
                   to={

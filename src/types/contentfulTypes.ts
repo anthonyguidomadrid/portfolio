@@ -41,7 +41,7 @@ export type ContentfulResponse = {
 export type ContentfulAbout = {
   id: string
   title: string
-  subtitle: string
+  subtitle: string[]
   description: {
     json: Document
   }

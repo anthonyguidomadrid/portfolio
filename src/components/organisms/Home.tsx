@@ -6,6 +6,7 @@ import { ProjectSlider } from '../molecules/ProjectSlider'
 import { Stack } from '../molecules/Stack'
 import { Contact } from '../molecules/Contact'
 import { PageContent } from '~types/normalizedContentTypes'
+import ReactGA from 'react-ga4'
 
 export type HomeProps = {
   pageContent: PageContent
@@ -20,6 +21,10 @@ export const Home: FunctionComponent<HomeProps> = ({
   useEffect(() => {
     setLocale(locale)
   }, [locale, setLocale])
+
+  useEffect(() => {
+    ReactGA.send({ hitType: 'pageview', page: '/' })
+  }, [])
 
   return (
     <>

@@ -17,6 +17,7 @@ describe(ChevronButton, () => {
     setup()
     expect(screen.getByTestId('chevron')).toBeInTheDocument()
   })
+
   it('fires the setIsSubMenuOpen function on click', () => {
     setup()
     fireEvent.click(screen.getByTestId('chevron'))

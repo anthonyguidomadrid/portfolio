@@ -23,7 +23,7 @@
     "npm": "^9.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-ga": "^3.3.1",
+    "react-ga4": "^2.0.0",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.6.1",
     "react-router-hash-link": "^2.4.3",
@@ -42,7 +42,8 @@
     "postbuild": "react-snap",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "serve": "serve -s build"
+    "serve": "serve -s build",
+    "verify": "yarn tsc && yarn lint && yarn test"
   },
   "eslintConfig": {
     "extends": [

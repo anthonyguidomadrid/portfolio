@@ -1,14 +1,12 @@
 import { useState, useEffect, useCallback } from 'react'
 import MoonLoader from 'react-spinners/ClipLoader'
-import { initialize, pageview } from 'react-ga'
 import { contentfulNormalizer } from './normalizer/contentfulNormalizer'
 import { graphQlQuery } from './graphQL/contentfulQuery'
 import { AppRoutes } from './routes/AppRoutes'
 import { locales } from './config/locales'
 import { capitalizeCountryFromLocale } from './helpers/transformLocale'
 import { PageContent } from '~types/normalizedContentTypes'
-
-initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID?.toString() ?? '')
+import ReactGA from 'react-ga4'
 
 function App() {
   const [pageContent, setPageContent] = useState<
@@ -42,14 +40,14 @@ function App() {
   }, [fetchContent])
 
   useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_GOOGLE_TRACKING_ID ?? '')
+  }, [])
+
+  useEffect(() => {
     if (locale && !Object.keys(locales).find(key => locales[key] === locale)) {
       window.location.href = locale ? `${locale}/404` : '/404'
     }
   }, [locale])
-
-  useEffect(() => {
-    pageview(window.location.pathname + window.location.search)
-  }, [])
 
   if (Object.keys(pageContent).length === 0) {
     return (

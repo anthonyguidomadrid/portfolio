@@ -2,11 +2,14 @@ import { Splide, SplideSlide } from '@splidejs/react-splide'
 import { getTranslationFromString } from '../../helpers/getTranslationFromString'
 import { HashLink as Link } from 'react-router-hash-link'
 import { useBreakpoint } from '../../customHooks/useBreakpoint'
-import { NormalizedProject, Translation } from '~types/normalizedContentTypes'
+import {
+  NormalizedProject,
+  NormalizedTranslation
+} from '~types/normalizedContentTypes'
 import { FunctionComponent } from 'react'
 
 export type ProjectRecommendationsProps = {
-  translations: Translation[] | undefined
+  translations: NormalizedTranslation[] | undefined
   selectedProject: NormalizedProject | Record<string, never>
   projectsContent: NormalizedProject[] | undefined
   locale: string | undefined
@@ -22,7 +25,7 @@ export const ProjectRecommendations: FunctionComponent<
   const isMobile = point === 'sm'
 
   return (
-    <section className="p-10 border-t">
+    <section className="p-10 border-t" data-testid="project-recommendations">
       <h3 className="uppercase font-bold text-lg text-center mb-5">
         {getTranslationFromString(
           'project-details.recommendations.title',
@@ -54,9 +57,7 @@ export const ProjectRecommendations: FunctionComponent<
                     style={{
                       backgroundColor: '#d0d0d0',
                       backgroundBlendMode: 'multiply',
-                      backgroundImage: `url(${
-                        thumbnail?.url ?? '../../default-banner-image.jpeg'
-                      })`,
+                      backgroundImage: `url(${thumbnail?.url})`,
                       backgroundRepeat: 'no-repeat',
                       backgroundSize: 'cover',
                       backgroundPosition: 'center'

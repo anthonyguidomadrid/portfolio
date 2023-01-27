@@ -11,6 +11,7 @@ describe(Button, () => {
     setup()
     expect(screen.getByTestId('button')).toBeInTheDocument()
   })
+
   it('changes the link target depending of the newTab prop', () => {
     setup({ text: 'Hello', link: '/', newTab: true })
     expect(screen.getByTestId('button')).toContainHTML('target="_blank"')

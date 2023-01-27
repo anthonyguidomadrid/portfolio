@@ -10,16 +10,17 @@ import MoonLoader from 'react-spinners/ClipLoader'
 import {
   NormalizedMenuItem,
   NormalizedProject,
-  Translation
+  NormalizedTranslation
 } from '~types/normalizedContentTypes'
 import { Header } from '../molecules/Header'
 import { ProjectDetail } from '../molecules/ProjectDetail'
 import { ProjectRecommendations } from '../molecules/ProjectRecommendations'
+import ReactGA from 'react-ga4'
 
 export type ProjectPageProps = {
   projectsContent: NormalizedProject[] | undefined
   setLocale: Dispatch<SetStateAction<string | undefined>>
-  translations: Translation[] | undefined
+  translations: NormalizedTranslation[] | undefined
   menuItems: NormalizedMenuItem[] | undefined
 }
 
@@ -52,6 +53,13 @@ export const ProjectPage: FunctionComponent<ProjectPageProps> = ({
       }
     }
   }, [id, navigate, projectsContent])
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: `${locale ?? ''}/projects/${selectedProject?.slug}`
+    })
+  }, [])
 
   if (!selectedProject) {
     return (

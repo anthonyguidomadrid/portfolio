@@ -20,7 +20,10 @@ export const Footer: FunctionComponent<FooterProps> = ({
   locale
 }) => {
   return (
-    <section className="bg-slate-900 text-white px-10 md:px-24">
+    <section
+      data-testid="footer"
+      className="bg-slate-900 text-white px-10 md:px-24"
+    >
       <div className="py-10">
         <Link smooth to={locale ? `${locale}/#top` : '/#top'}>
           <img
@@ -57,7 +60,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
           })}
         </div>
       )}
-      <div className="flex items-center justify-between py-5">
+      <footer className="flex items-center justify-between py-5">
         <p className="text-xs">
           Copyright © {new Date().getFullYear()} Anthony Guido
         </p>
@@ -69,7 +72,7 @@ export const Footer: FunctionComponent<FooterProps> = ({
         >
           Source code
         </a>
-      </div>
+      </footer>
     </section>
   )
 }

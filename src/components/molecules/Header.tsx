@@ -30,14 +30,13 @@ export const Header: FunctionComponent<HeaderProps> = ({
     menuItems && menuItems.find(project => project.isProject)?.link
 
   return (
-    <div
+    <header
+      data-testid="header"
       style={{
         backgroundColor: '#bfbfbf',
         backgroundBlendMode: 'multiply',
         backgroundImage: `url(${
-          headerContent?.thumbnail?.url ??
-          headerContent?.image?.url ??
-          '../../default-banner-image.jpeg'
+          headerContent?.thumbnail?.url ?? headerContent?.image?.url
         })`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
@@ -50,7 +49,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
         { 'py-36': !isFullSize }
       )}
     >
-      {displayBackBtn && (
+      {displayBackBtn && projectLink && (
         <Link
           smooth
           to={locale ? `/${locale}/#${projectLink}` : `/#${projectLink}`}
@@ -61,7 +60,7 @@ export const Header: FunctionComponent<HeaderProps> = ({
         </Link>
       )}
       <h1 className="text-4xl md:text-6xl font-bold uppercase drop-shadow-lg text-center">
-        {headerContent?.title ?? 'Hello World'}
+        {headerContent?.title}
       </h1>
       {headerContent?.subtitle && (
         <p className="text-xl md:text-3xl uppercase py-5 drop-shadow-lg text-center">
@@ -83,6 +82,6 @@ export const Header: FunctionComponent<HeaderProps> = ({
           {headerContent?.ctaText}
         </Link>
       )}
-    </div>
+    </header>
   )
 }

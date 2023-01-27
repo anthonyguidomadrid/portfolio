@@ -10,11 +10,14 @@ import { ReactComponent as Email } from '../../assets/Email.svg'
 import classNames from 'classnames'
 import { send } from 'emailjs-com'
 import { getTranslationFromString } from '../../helpers/getTranslationFromString'
-import { NormalizedContact, Translation } from '~types/normalizedContentTypes'
+import {
+  NormalizedContact,
+  NormalizedTranslation
+} from '~types/normalizedContentTypes'
 
 export type ContactProps = {
   contactContent: NormalizedContact
-  translations: Translation[] | undefined
+  translations: NormalizedTranslation[] | undefined
 }
 
 export const Contact: FunctionComponent<ContactProps> = ({
@@ -74,7 +77,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
   )
 
   return (
-    <section className="md:flex" id={id}>
+    <section className="md:flex" id={id} data-testid="contact">
       <div className="md:w-1/2 pt-10 px-10 md:pb-10 flex justify-center flex-col order-2 lg:mx-24">
         <h2 className="uppercase font-bold text-xl">{title}</h2>
         <p className="font-mono text-3xl text-gray-500 my-5 lg:pb-5">
@@ -127,6 +130,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
         >
           <label>
             <input
+              data-testid="name-input"
               type="text"
               placeholder={getTranslationFromString(
                 'home.contact.form.name',
@@ -141,6 +145,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
           </label>
           <label>
             <input
+              data-testid="email-input"
               type="email"
               placeholder={getTranslationFromString(
                 'home.contact.form.email',
@@ -156,6 +161,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
           </label>
           <label>
             <input
+              data-testid="subject-input"
               type="text"
               placeholder={getTranslationFromString(
                 'home.contact.form.subject',
@@ -171,6 +177,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
           </label>
           <label>
             <textarea
+              data-testid="text-input"
               placeholder={getTranslationFromString(
                 'home.contact.form.message',
                 translations
@@ -184,6 +191,7 @@ export const Contact: FunctionComponent<ContactProps> = ({
             />
           </label>
           <input
+            data-testid="submit-button"
             type="submit"
             value={getTranslationFromString(
               'home.contact.form.submit',

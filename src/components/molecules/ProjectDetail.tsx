@@ -2,14 +2,17 @@ import { Button } from '../atoms/Button'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import { getTranslationFromString } from '../../helpers/getTranslationFromString'
 import { FunctionComponent } from 'react'
-import { NormalizedProject, Translation } from '~types/normalizedContentTypes'
+import {
+  NormalizedProject,
+  NormalizedTranslation
+} from '~types/normalizedContentTypes'
 
-export type ProjectDetail = {
+export type ProjectDetailProps = {
   projectContent: NormalizedProject | Record<string, never>
-  translations: Translation[] | undefined
+  translations: NormalizedTranslation[] | undefined
 }
 
-export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
+export const ProjectDetail: FunctionComponent<ProjectDetailProps> = ({
   projectContent,
   translations
 }) => {
@@ -25,7 +28,7 @@ export const ProjectDetail: FunctionComponent<ProjectDetail> = ({
   } = projectContent
 
   return (
-    <section className="lg:flex items-center">
+    <section className="lg:flex items-center" data-testid="project-detail">
       <div className="lg:w-1/2">
         {images?.length > 0 && (
           <Splide
